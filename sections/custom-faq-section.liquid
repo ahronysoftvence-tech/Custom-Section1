@@ -1,0 +1,336 @@
+
+{% schema %}
+{
+  "name": "FAQ Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Curious About Our Rugs? Start Here"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Section Description",
+      "default": "All about quality, care, and making it yours."
+    },
+    {
+      "type": "checkbox",
+      "id": "one_per_row",
+      "label": "Show one FAQ per row",
+      "default": true,
+      "info": "When enabled, FAQ items will display one per row"
+    },
+    {
+      "type": "range",
+      "id": "gap_size",
+      "label": "Gap between items",
+      "min": 0,
+      "max": 50,
+      "step": 1,
+      "default": 24,
+      "unit": "px"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#222222"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#8b7355"
+    },
+    {
+      "type": "color",
+      "id": "item_bg_color",
+      "label": "FAQ item background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_border",
+      "label": "Show border around FAQ items",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#f0f0f0"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "faq",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "What's in our rugs?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Our rugs are made from premium wool and cotton blends, crafted for softness and durability. Each rug undergoes rigorous quality checks to ensure it meets our high standards."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "FAQ Section - One per row",
+      "category": "Custom Sections",
+      "settings": {
+        "one_per_row": true,
+        "gap_size": 24
+      },
+      "blocks": [
+        {
+          "type": "faq",
+          "settings": {
+            "question": "What's in our rugs?",
+            "answer": "Our rugs are made from premium wool and cotton blends, crafted for softness and durability. Each rug undergoes rigorous quality checks to ensure it meets our high standards."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "100% Authentic, every time",
+            "answer": "Each rug is handmade by skilled artisans, ensuring authenticity and quality. We work directly with craftspeople to maintain traditional techniques and support local communities."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "How we make them",
+            "answer": "Each piece is handwoven using traditional Moroccan techniques passed down through generations. This process can take several weeks depending on the size and complexity of the design."
+          }
+        },
+        {
+          "type": "faq",
+          "settings": {
+            "question": "Values we weave in",
+            "answer": "We prioritize ethical production, fair trade, and sustainable materials. Our commitment extends to environmental responsibility and supporting artisan communities."
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+
+{% style %}
+.rcustom-faq-section {
+  padding: 80px 20px;
+  text-align: center;
+  max-width: 1800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  background-color: {{ section.settings.background_color }};
+}
+
+.rcustom-faq-header h2 {
+  font-size: 36px;
+  color: {{ section.settings.text_color }};
+  font-weight:600;
+
+}
+
+.rcustom-faq-header p {
+  font-size: 16px;
+  color: {{ section.settings.text_color | color_modify: 'alpha', 0.7 }};
+  margin-bottom: 50px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rcustom-faq-grid {
+  display: grid;
+  gap: {{ section.settings.gap_size }}px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+{% if section.settings.one_per_row %}
+  .rcustom-faq-grid {
+    grid-template-columns: 1fr;
+  }
+{% else %}
+  .rcustom-faq-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+{% endif %}
+
+.rcustom-faq-item {
+  background: {{ section.settings.item_bg_color }};
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+}
+
+{% if section.settings.show_border %}
+  .rcustom-faq-item {
+    border: 1px solid {{ section.settings.border_color }};
+  }
+{% endif %}
+
+.rcustom-faq-item:hover {
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.rcustom-faq-question {
+  width: 100%;
+  text-align: left;
+  padding: 20px 24px;
+  font-weight: 600;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+  color: {{ section.settings.text_color }};
+}
+
+.rcustom-faq-question:hover {
+  background-color: rgba(0,0,0,0.03);
+}
+
+.rcustom-faq-question span {
+  font-weight: bold;
+  font-size: 18px;
+  transition: transform 0.3s;
+  color: {{ section.settings.accent_color }};
+  flex-shrink: 0;
+  margin-left: 20px;
+}
+
+.rcustom-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  padding: 0 24px;
+  font-size: 15px;
+  color: {{ section.settings.text_color | color_modify: 'alpha', 0.7 }};
+  line-height: 1.6;
+  text-align: left;
+  transition: all 0.3s ease;
+  opacity: 0;
+}
+
+.rcustom-faq-item.active .rcustom-faq-answer {
+  max-height: 500px;
+  padding: 0 24px 20px;
+  opacity: 1;
+}
+
+.rcustom-faq-item.active .rcustom-faq-question span {
+  transform: rotate(45deg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .rcustom-faq-grid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+  }
+}
+
+@media (max-width: 600px) {
+  .rcustom-faq-section {
+    padding: 50px 15px;
+  }
+  
+  .rcustom-faq-header h2 {
+    font-size: 28px;
+  }
+  
+  .rcustom-faq-grid {
+    gap: 16px;
+  }
+  
+  .rcustom-faq-question {
+    padding: 16px 20px;
+    font-size: 15px;
+  }
+  
+  .rcustom-faq-question span {
+    margin-left: 15px;
+  }
+}
+{% endstyle %}
+
+<section class="rcustom-faq-section">
+  <div class="rcustom-faq-header">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.description }}</p>
+  </div>
+
+  <div class="rcustom-faq-grid">
+    {% for block in section.blocks %}
+      <div class="rcustom-faq-item" {{ block.shopify_attributes }}>
+        <button class="rcustom-faq-question" aria-expanded="false">
+          {{ block.settings.question }}
+          <span>+</span>
+        </button>
+        <div class="rcustom-faq-answer" role="region" aria-hidden="true">
+          {{ block.settings.answer }}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.rcustom-faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const faqItem = button.closest('.rcustom-faq-item');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+      const answer = faqItem.querySelector('.rcustom-faq-answer');
+      
+      // Toggle active class
+      faqItem.classList.toggle('active');
+      
+      // Update aria attributes
+      button.setAttribute('aria-expanded', !isExpanded);
+      answer.setAttribute('aria-hidden', isExpanded);
+      
+      // Close other FAQ items if you want accordion behavior
+      // Uncomment below if you want only one FAQ open at a time
+      /*
+      document.querySelectorAll('.rcustom-faq-item').forEach(item => {
+        if (item !== faqItem && item.classList.contains('active')) {
+          item.classList.remove('active');
+          const otherButton = item.querySelector('.rcustom-faq-question');
+          const otherAnswer = item.querySelector('.rcustom-faq-answer');
+          otherButton.setAttribute('aria-expanded', 'false');
+          otherAnswer.setAttribute('aria-hidden', 'true');
+        }
+      });
+      */
+    });
+  });
+});
+</script>

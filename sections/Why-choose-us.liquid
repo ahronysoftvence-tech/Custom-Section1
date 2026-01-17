@@ -1,0 +1,542 @@
+
+{% comment %} {{ 'section-why-choose.css' | asset_url | stylesheet_tag }} {% endcomment %}
+
+{%- style -%}
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    --section-background: {{ section.settings.background_color }};
+    --title-color: {{ section.settings.title_color }};
+    --subtitle-color: {{ section.settings.subtitle_color }};
+    --feature-title-color: {{ section.settings.feature_title_color }};
+    --feature-text-color: {{ section.settings.feature_text_color }};
+    --icon-background: {{ section.settings.icon_background }};
+    --divider-color: {{ section.settings.divider_color }};
+    --stats-background: {{ section.settings.stats_background }};
+    --stats-number-color: {{ section.settings.stats_number_color }};
+    --stats-text-color: {{ section.settings.stats_text_color }};
+    --icon-truck-color: {{ section.settings.icon_truck_color }};
+    --icon-truck-background: {{ section.settings.icon_truck_background }};
+    padding-top: var(--section-padding-top);
+    padding-bottom: var(--section-padding-bottom);
+    background-color: var(--section-background);
+  }
+{%- endstyle -%}
+
+<div class="why-choose__wrapper">
+  <div class="main_con">
+    <div class="left-section">
+      {%- if section.settings.subtitle != blank -%}
+        <p class="subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+      
+      {%- if section.settings.title != blank -%}
+        <h1 class="title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+      
+      <div class="features">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'feature' -%}
+            <div class="feature" {{ block.shopify_attributes }}>
+              <div class="icon-wrapper">
+                {%- if block.settings.icon_image != blank -%}
+                  <img 
+                    src="{{ block.settings.icon_image | img_url: '100x100' }}" 
+                    alt="{{ block.settings.icon_image.alt | escape }}" 
+                    width="100" 
+                    height="100" 
+                    loading="lazy"
+                  >
+                {%- else -%}
+                  <div class="placeholder-icon">{{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}</div>
+                {%- endif -%}
+              </div>
+              
+              {%- if block.settings.title != blank -%}
+                <h2>{{ block.settings.title }}</h2>
+              {%- endif -%}
+              
+              {%- if block.settings.description != blank -%}
+                <p>{{ block.settings.description }}</p>
+              {%- endif -%}
+              
+              <hr>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+    
+    <div class="right-section">
+      {%- if section.settings.main_image != blank -%}
+        <img 
+          src="{{ section.settings.main_image | img_url: '800x' }}" 
+          alt="{{ section.settings.main_image.alt | escape }}" 
+          loading="lazy" 
+          width="800" 
+          height="600"
+        >
+      {%- else -%}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+      
+      {% comment %} <div class="stats-box">
+        <div class="stats-number">{{ section.settings.stats_number }}</div>
+        <div class="stats-text">
+          {%- if section.settings.stats_line1 != blank -%}
+            <span>{{ section.settings.stats_line1 }}</span>
+          {%- endif -%}
+          {%- if section.settings.stats_line2 != blank -%}
+            <span>{{ section.settings.stats_line2 }}</span>
+          {%- endif -%}
+        </div>
+        <div class="icon-truck-wrapper">
+          {%- if section.settings.truck_icon != blank -%}
+            <img 
+              src="{{ section.settings.truck_icon | img_url: '40x40' }}" 
+              alt="{{ section.settings.truck_icon.alt | escape }}" 
+              width="40" 
+              height="40" 
+              loading="lazy"
+            >
+          {%- else -%}
+            <i class="fas fa-truck"></i>
+          {%- endif -%}
+        </div>
+      </div> {% endcomment %}
+    </div>
+  </div>
+</div>
+
+<style>
+  .why-choose__wrapper {
+    padding: 0 1rem;
+  }
+  
+  .main_con {
+    align-items: center;
+    max-width: 1500px;
+    margin: 0 auto;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 1024px) {
+    .main_con {
+      grid-template-columns: 1.5fr 1fr;
+      gap: 4rem;
+    }
+  }
+
+  .left-section {
+    padding-right: 1rem;
+  }
+
+  .left-section p.subtitle {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    text-transform: capitalize;
+    color: var(--subtitle-color);
+  }
+
+  .left-section h1.title {
+    text-align: start;
+    font-size: clamp(1.75rem, 4vw, 2.25rem);
+    font-weight: 600;
+    color: var(--title-color);
+    line-height: 1.25;
+    margin-bottom: 3rem;
+  }
+
+  .features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem 4rem;
+    max-width: 100%;
+  }
+
+  @media (min-width: 640px) {
+    .features {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .feature {
+    position: relative;
+    padding-right: 1rem;
+  }
+
+  .icon-wrapper {
+    width: 3rem;
+    height: 3rem;
+    background-color: var(--icon-background);
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+  
+  .icon-wrapper img {
+    width: 80%;
+    height: 100%;
+    object-fit: contain;
+  }
+  
+  .placeholder-icon {
+    width: 60%;
+    height: 60%;
+    color: #E0C388;
+  }
+
+  .feature h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--feature-title-color);
+    margin-bottom: 0.5rem;
+    text-align: start;
+  }
+
+  .feature p {
+    text-align: start;
+    font-size: 1rem;
+    line-height: 1.6;
+    max-width: 22rem;
+    color: var(--feature-text-color);
+    margin-bottom: 1.75rem;
+  }
+
+  .feature hr {
+    border: none;
+    border-top: 1px solid var(--divider-color);
+    margin-top: 1.75rem;
+    width: 80%;
+  }
+
+  .right-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+
+  .right-section img {
+    width: 100%;
+    max-width: 100%;
+    height: 530px;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    
+    display: block;
+    
+  }
+
+  .stats-box {
+    display: none !important;
+    background-color: var(--stats-background);
+    border-radius: 0.75rem;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 2rem;
+    color: var(--stats-text-color);
+    font-weight: 600;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+    margin-top: 1.5rem;
+  }
+
+  .stats-number {
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    line-height: 1;
+    font-weight: 700;
+    color: var(--stats-number-color);
+  }
+
+  .stats-text {
+    line-height: 1.4;
+    display: flex;
+    flex-direction: column;
+    margin-right: auto;
+    margin-left: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .icon-truck-wrapper {
+    padding: 0.75rem;
+    background-color: var(--icon-truck-background);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .icon-truck-wrapper img {
+    width: 1.5rem;
+    height: 1.5rem;
+    object-fit: contain;
+  }
+  
+  .icon-truck-wrapper i {
+    font-size: 1.5rem;
+    color: var(--icon-truck-color);
+  }
+
+  /* Mobile Adjustments */
+  @media (max-width: 640px) {
+    .main_con {
+      gap: 2rem;
+    }
+
+    .left-section h1.title {
+      margin-bottom: 2rem;
+    }
+
+    .feature {
+      padding-right: 0;
+    }
+
+    .feature hr {
+      width: 100%;
+    }
+
+    .stats-box {
+      padding: 1rem 1.5rem;
+    }
+
+    .right-section img {
+      height: 350px;
+      max-height: 100%;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Why Choose Us",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Section Settings"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 36
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Our Promise"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Why choose Abijah Wear?"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#2f2f2f"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle Color",
+      "default": "#000000"
+    },
+    {
+      "type": "header",
+      "content": "Main Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Image"
+    },
+    {
+      "type": "header",
+      "content": "Stats Box"
+    },
+    {
+      "type": "text",
+      "id": "stats_number",
+      "label": "Stats Number",
+      "default": "50K+"
+    },
+    {
+      "type": "text",
+      "id": "stats_line1",
+      "label": "Stats Line 1",
+      "default": "Products"
+    },
+    {
+      "type": "text",
+      "id": "stats_line2",
+      "label": "Stats Line 2",
+      "default": "Sold Worldwide"
+    },
+    {
+      "type": "image_picker",
+      "id": "truck_icon",
+      "label": "Truck Icon Image"
+    },
+    {
+      "type": "color",
+      "id": "stats_background",
+      "label": "Stats Background Color",
+      "default": "#E0C388"
+    },
+    {
+      "type": "color",
+      "id": "stats_number_color",
+      "label": "Stats Number Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "stats_text_color",
+      "label": "Stats Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_truck_color",
+      "label": "Icon Color (if no image)",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_truck_background",
+      "label": "Icon Background Color",
+      "default": "transparent"
+    },
+    {
+      "type": "header",
+      "content": "Feature Settings"
+    },
+    {
+      "type": "color",
+      "id": "feature_title_color",
+      "label": "Feature Title Color",
+      "default": "#3a3a3a"
+    },
+    {
+      "type": "color",
+      "id": "feature_text_color",
+      "label": "Feature Text Color",
+      "default": "#000000"
+    },
+    {
+      "type": "color",
+      "id": "icon_background",
+      "label": "Icon Background Color",
+      "default": "#f0f6ec"
+    },
+    {
+      "type": "color",
+      "id": "divider_color",
+      "label": "Divider Color",
+      "default": "#e0e0e0"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Premium Quality"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Our pieces are crafted with the finest materials, ensuring durability and comfort in every wear."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Why Choose Us",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Premium Quality",
+            "description": "Our pieces are crafted with the finest materials, ensuring durability and comfort in every wear."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Bold Designs",
+            "description": "Featuring our signature gold Knights crest, each item embodies the power and confidence of luxury streetwear."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Streetwear with Purpose",
+            "description": "Designed for those who move with intent, our pieces stand as a reflection of your drive and ambition."
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Timeless Style",
+            "description": "Our black and gold aesthetic transcends trends, offering you a stylish look that never goes out of fashion."
+          }
+        }
+      ]
+    }
+  ],
+  "max_blocks": 4
+}
+{% endschema %}

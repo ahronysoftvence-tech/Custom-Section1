@@ -1,0 +1,277 @@
+{% schema %}
+{
+  "name": "Gym Benefits",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Your Trusted Real Estate Advisors"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_left",
+      "label": "Left Subtext",
+      "default": "With over a decade of experience in the real estate market, our team of dedicated professionals provides personalized guidance to help you find your dream property or maximize your investment returns."
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Image 2"
+    },
+    {
+      "type": "textarea",
+      "id": "subtext_right",
+      "label": "Right Subtext",
+      "default": "Our comprehensive approach combines market expertise with cutting-edge technology to deliver exceptional results for buyers, sellers, and investors alike."
+    },
+
+    { "type": "header", "content": "Stats" },
+
+    {
+      "type": "text",
+      "id": "stat1_number",
+      "label": "Benefits-1",
+      "default": "500+"
+    },
+    {
+      "type": "text",
+      "id": "stat1_label",
+      "label": "Benefits-1 description",
+      "default": "Satisfied Clients"
+    },
+
+    {
+      "type": "text",
+      "id": "stat2_number",
+      "label": "Benefits-2",
+      "default": "25+"
+    },
+    {
+      "type": "text",
+      "id": "stat2_label",
+      "label": "Benefits-2 description",
+      "default": "Award Winning"
+    },
+
+    {
+      "type": "text",
+      "id": "stat3_number",
+      "label": "Benefits-3",
+      "default": "12+"
+    },
+    {
+      "type": "text",
+      "id": "stat3_label",
+      "label": "Benefits-3 Description",
+      "default": "Years of Experience"
+    },
+
+    {
+      "type": "text",
+      "id": "stat4_number",
+      "label": "Benefits-4",
+      "default": "$2B+"
+    },
+    {
+      "type": "text",
+      "id": "stat4_label",
+      "label": "Benefits-4 Description",
+      "default": "Property Transactions"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gym Benefits"
+    }
+  ]
+}
+{% endschema %}
+
+<section class="advisor-section" style="background: {{ section.settings.bg_color }};">
+  <div class="advisor-inner">
+    <div class="advisor-left">
+      <h2>{{ section.settings.title }}</h2>
+
+      <p class="subtext">{{ section.settings.subtext_left }}</p>
+
+      <div class="stats-grid">
+        <div class="stat-box">
+          <h3>{{ section.settings.stat1_number }}</h3>
+          <p>{{ section.settings.stat1_label }}</p>
+        </div>
+
+        <div class="stat-box blue">
+          <h3>{{ section.settings.stat2_number }}</h3>
+          <p>{{ section.settings.stat2_label }}</p>
+        </div>
+
+        <div class="stat-box">
+          <h3>{{ section.settings.stat3_number }}</h3>
+          <p>{{ section.settings.stat3_label }}</p>
+        </div>
+
+        <div class="stat-box">
+          <h3>{{ section.settings.stat4_number }}</h3>
+          <p>{{ section.settings.stat4_label }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="advisor-right">
+      <div class="image-grid">
+        {% if section.settings.image_1 %}
+          <img src="{{ section.settings.image_1 | image_url: width: 800 }}" alt="Image 1">
+        {% endif %}
+        {% if section.settings.image_2 %}
+          <img src="{{ section.settings.image_2 | image_url: width: 800 }}" alt="Image 2">
+        {% endif %}
+      </div>
+
+      <p class="subtext" style="margin-top: 25px;">
+        {{ section.settings.subtext_right }}
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .advisor-section {
+    width: 100%;
+    padding-top: 80px;
+  }
+  .advisor-inner {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    padding: 15px;
+    max-width: 1620px;
+    margin: 0 auto;
+  }
+
+  .advisor-left, .advisor-right {
+    flex: 1;
+  }
+
+  .advisor-left h2 {
+    font-size: 38px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.2;
+    color: #1a1a1a;
+  }
+
+  .subtext {
+    font-size: 18px;
+    color: #000;
+    margin: 10px 0 20px;
+    line-height: 1.7;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+    margin-top: 20px;
+  }
+
+  .stat-box {
+    background: #fcf7ee;
+    padding: 30px 25px;
+    border-radius: 16px;
+    transition: .3s ease;
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.03);
+  }
+
+  .stat-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+  }
+
+  .stat-box.blue {
+    background: #fcf7ee;
+    color: #000;
+  }
+
+  .stat-box h3 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .stat-box p {
+    margin-top: 8px;
+    font-size: 16px;
+    color: #5c5757;
+    font-weight: 500;
+  }
+
+
+  .image-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .image-grid img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    {% comment %} border-radius: 12px; {% endcomment %}
+    transition: .3s ease;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  }
+  .image-grid img:hover {
+    transform: scale(1.03);
+  }
+
+ 
+
+  @media (max-width: 1024px) {
+    .advisor-inner {
+      flex-direction: column;
+      gap: 40px;
+    }
+    .advisor-left h2 {
+      font-size: 36px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .advisor-section {
+      padding-top: 30px;
+    }
+    .stats-grid{
+      gap: 20px
+    }
+    .image-grid {
+      grid-template-columns: 1fr;
+    
+    }
+    .image-grid img {
+      height: 300px;
+    }
+    .stat-box{
+     
+     padding: 12px;
+    }
+    .stat-box h3 {
+        font-size: 20px;
+        margin: 0;
+        font-weight: 600;
+   }
+
+  }
+</style>

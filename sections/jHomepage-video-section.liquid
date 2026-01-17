@@ -1,0 +1,1026 @@
+{% style %}
+.jHomepage-video-section {
+  padding: {{ section.settings.section_padding_top }}px 20px {{ section.settings.section_padding_bottom }}px;
+  background: #fff;
+  max-width: {{ section.settings.max_width }}px;
+  margin: 0 auto;
+}
+
+.jHomepage-video-heading {
+  text-align: center;
+  color: {{ section.settings.primary_color }};
+  margin-bottom: 20px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.jHomepage-video-description {
+  text-align: center;
+  color: #666;
+  margin-top: 40px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.jHomepage-video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: #000;
+  cursor: pointer;
+  margin: 0 auto;
+}
+
+.jHomepage-video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Thumbnail container */
+.jHomepage-thumbnail-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+}
+
+.jHomepage-video-thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Fallback thumbnail styling */
+.jHomepage-fallback-thumbnail {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Single video styles */
+.jHomepage-single-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  display: none;
+}
+
+/* Comparison video styles - both videos side by side */
+.jHomepage-before-video,
+.jHomepage-after-video {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  display: none;
+}
+
+.jHomepage-before-video {
+  left: 0;
+}
+
+.jHomepage-after-video {
+  right: 0;
+}
+
+/* Divider styles - only for comparison mode */
+.jHomepage-video-divider {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 4px;
+  height: 100%;
+  background: {{ section.settings.secondary_color }};
+  cursor: ew-resize;
+  z-index: 20;
+  transform: translateX(-50%);
+  display: none;
+  transition: background-color 0.3s;
+}
+
+.jHomepage-video-divider:hover {
+  background: {{ section.settings.primary_color }};
+  width: 6px;
+}
+
+.jHomepage-video-divider-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  background: {{ section.settings.secondary_color }};
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+  cursor: ew-resize;
+}
+
+.jHomepage-video-divider:hover .jHomepage-video-divider-handle {
+  background: {{ section.settings.primary_color }};
+  transform: translate(-50%, -50%) scale(1.1);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+/* Labels styles - only for comparison mode */
+.jHomepage-video-labels {
+  position: absolute;
+  width: 100%;
+  top: 20px;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 15;
+  display: none;
+}
+
+.jHomepage-video-label {
+  background: {{ section.settings.primary_color }};
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  opacity: 0.9;
+  backdrop-filter: blur(4px);
+}
+
+.jHomepage-video-label-after {
+  background: {{ section.settings.secondary_color }};
+}
+
+/* Play button styles */
+.jHomepage-video-play-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80px;
+  height: 80px;
+  background: {{ section.settings.primary_color }};
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  z-index: 25;
+  transition: all 0.3s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  opacity: 0.9;
+}
+
+.jHomepage-video-play-center:hover {
+  transform: translate(-50%, -50%) scale(1.05);
+  opacity: 1;
+  background: {{ section.settings.secondary_color }};
+}
+
+.jHomepage-video-play-bottom {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: {{ section.settings.primary_color }};
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 20px;
+  border: none;
+  cursor: pointer;
+  z-index: 25;
+  transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  display: none;
+}
+
+.jHomepage-video-play-bottom:hover {
+  transform: scale(1.05);
+  background: {{ section.settings.secondary_color }};
+}
+
+/* Video controls overlay */
+.jHomepage-video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* Utility classes */
+.jHomepage-hidden {
+  display: none !important;
+}
+
+.jHomepage-show {
+  display: flex !important;
+}
+
+.jHomepage-block {
+  display: block !important;
+}
+
+/* Loading indicator */
+.jHomepage-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-radius: 50%;
+  border-top-color: {{ section.settings.primary_color }};
+  animation: spin 1s ease-in-out infinite;
+  z-index: 30;
+  display: none;
+}
+
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Demo mode styling for customization page */
+.jHomepage-demo-mode {
+  pointer-events: none;
+}
+
+.jHomepage-demo-mode .jHomepage-video-play-center {
+  display: none !important;
+}
+
+.jHomepage-demo-mode .jHomepage-video-play-bottom {
+  display: none !important;
+}
+
+.jHomepage-demo-mode .jHomepage-video-divider {
+  pointer-events: none;
+}
+
+/* Hide extra space for comparison videos */
+.jHomepage-video-wrapper .jHomepage-before-video,
+.jHomepage-video-wrapper .jHomepage-after-video {
+  object-position: center center;
+}
+{% endstyle %}
+
+<div class="jHomepage-video-section">
+  <h2 class="jHomepage-video-heading">{{ section.settings.heading }}</h2>
+  
+  <div class="jHomepage-video-wrapper">
+    <div class="jHomepage-video-container">
+      <!-- Thumbnail Section -->
+      <div class="jHomepage-thumbnail-container" id="jHomepage-thumbnail-container">
+        {% if section.settings.video_mode == 'single' %}
+          {% if section.settings.single_thumbnail %}
+            <img src="{{ section.settings.single_thumbnail | img_url: '2000x' }}" 
+                 alt="{{ section.settings.heading }}" 
+                 class="jHomepage-video-thumbnail">
+          {% else %}
+            <div class="jHomepage-fallback-thumbnail" style="background: {{ section.settings.primary_color }};">
+              <div>
+                <p style="font-size: 1.5rem; margin-bottom: 10px;">▶</p>
+                <p>Video Preview</p>
+                <p style="font-size: 0.9rem; margin-top: 5px; opacity: 0.8;">Single Video Mode</p>
+              </div>
+            </div>
+          {% endif %}
+        {% else %}
+          {% if section.settings.comparison_thumbnail %}
+            <img src="{{ section.settings.comparison_thumbnail | img_url: '2000x' }}" 
+                 alt="{{ section.settings.before_label }} / {{ section.settings.after_label }}" 
+                 class="jHomepage-video-thumbnail">
+          {% else %}
+            <div class="jHomepage-fallback-thumbnail" style="background: linear-gradient(90deg, {{ section.settings.primary_color }} 50%, {{ section.settings.secondary_color }} 50%);">
+              <div>
+                <p style="font-size: 1.5rem; margin-bottom: 10px;">↔</p>
+                <p>{{ section.settings.before_label }} / {{ section.settings.after_label }}</p>
+                <p style="font-size: 0.9rem; margin-top: 5px; opacity: 0.8;">Comparison Mode</p>
+              </div>
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+      
+      <!-- Video overlay for click handling -->
+      <div class="jHomepage-video-overlay" id="jHomepage-video-overlay"></div>
+      
+      <!-- Loading indicator -->
+      <div class="jHomepage-loading" id="jHomepage-loading"></div>
+      
+      {% if section.settings.video_mode == 'single' %}
+        <!-- Single Video Mode -->
+        {% if section.settings.single_video_url != blank %}
+          <video class="jHomepage-single-video" 
+                 id="jHomepage-single-video" 
+                 preload="metadata"
+                 {% if section.settings.enable_muted %}muted{% endif %}
+                 {% if section.settings.enable_loop %}loop{% endif %}
+                 playsinline>
+            {% if section.settings.single_video_url contains 'youtube.com' or section.settings.single_video_url contains 'youtu.be' %}
+              <!-- YouTube video would be handled via iframe -->
+            {% elsif section.settings.single_video_url contains 'vimeo.com' %}
+              <!-- Vimeo video would be handled via iframe -->
+            {% else %}
+              <source src="{{ section.settings.single_video_url }}" type="video/mp4">
+              Your browser does not support the video tag.
+            {% endif %}
+          </video>
+        {% endif %}
+        
+      {% else %}
+        <!-- Comparison Video Mode - Side by side -->
+        {% if section.settings.before_video_url != blank %}
+          <video class="jHomepage-before-video" 
+                 id="jHomepage-before-video" 
+                 preload="metadata"
+                 {% if section.settings.enable_muted %}muted{% endif %}
+                 {% if section.settings.enable_loop %}loop{% endif %}
+                 playsinline>
+            {% if section.settings.before_video_url contains 'youtube.com' or section.settings.before_video_url contains 'youtu.be' %}
+              <!-- YouTube video would be handled via iframe -->
+            {% elsif section.settings.before_video_url contains 'vimeo.com' %}
+              <!-- Vimeo video would be handled via iframe -->
+            {% else %}
+              <source src="{{ section.settings.before_video_url }}" type="video/mp4">
+            {% endif %}
+          </video>
+        {% endif %}
+        
+        {% if section.settings.after_video_url != blank %}
+          <video class="jHomepage-after-video" 
+                 id="jHomepage-after-video" 
+                 preload="metadata"
+                 {% if section.settings.enable_muted %}muted{% endif %}
+                 {% if section.settings.enable_loop %}loop{% endif %}
+                 playsinline>
+            {% if section.settings.after_video_url contains 'youtube.com' or section.settings.after_video_url contains 'youtu.be' %}
+              <!-- YouTube video would be handled via iframe -->
+            {% elsif section.settings.after_video_url contains 'vimeo.com' %}
+              <!-- Vimeo video would be handled via iframe -->
+            {% else %}
+              <source src="{{ section.settings.after_video_url }}" type="video/mp4">
+            {% endif %}
+          </video>
+        {% endif %}
+        
+        <!-- Labels and Divider - Only for comparison mode -->
+        <div class="jHomepage-video-labels" id="jHomepage-labels">
+          <div class="jHomepage-video-label">{{ section.settings.before_label }}</div>
+          <div class="jHomepage-video-label jHomepage-video-label-after">{{ section.settings.after_label }}</div>
+        </div>
+        
+        <div class="jHomepage-video-divider" id="jHomepage-divider">
+          <div class="jHomepage-video-divider-handle">↔</div>
+        </div>
+      {% endif %}
+    </div>
+    
+    <!-- Play Buttons -->
+    <button class="jHomepage-video-play-center" id="jHomepage-center-play">▶</button>
+    <button class="jHomepage-video-play-bottom jHomepage-hidden" id="jHomepage-bottom-play">❚❚</button>
+  </div>
+  
+  {% if section.settings.description != blank %}
+    <div class="jHomepage-video-description">{{ section.settings.description }}</div>
+  {% endif %}
+</div>
+
+<script>
+// Check if we're in the theme editor/Shopify customization page
+const isShopifyEditor = window.Shopify && window.Shopify.designMode;
+const isPreviewMode = document.body.classList.contains('preview-mode') || 
+                     document.body.classList.contains('shopify-design-mode') ||
+                     window.location.search.includes('preview_theme_id') ||
+                     window.location.pathname.includes('editor');
+
+// Initialize the video section
+function initVideoSection() {
+  const videoMode = '{{ section.settings.video_mode }}';
+  const isComparisonMode = videoMode === 'comparison';
+  const enableAutoplay = {{ section.settings.enable_autoplay }};
+  
+  // If in demo mode (customizer), show static preview and return
+  if (isShopifyEditor || isPreviewMode) {
+    document.querySelector('.jHomepage-video-wrapper')?.classList.add('jHomepage-demo-mode');
+    
+    // Show labels and divider in comparison mode for preview
+    if (isComparisonMode) {
+      const labels = document.getElementById('jHomepage-labels');
+      const divider = document.getElementById('jHomepage-divider');
+      
+      if (labels) {
+        labels.classList.remove('jHomepage-hidden');
+        labels.classList.add('jHomepage-show');
+      }
+      
+      if (divider) {
+        divider.classList.remove('jHomepage-hidden');
+        divider.classList.add('jHomepage-block');
+      }
+    }
+    
+    // Hide play buttons in demo mode
+    document.getElementById('jHomepage-center-play')?.classList.add('jHomepage-hidden');
+    document.getElementById('jHomepage-bottom-play')?.classList.add('jHomepage-hidden');
+    
+    return;
+  }
+  
+  // Get elements
+  const thumbnailContainer = document.getElementById('jHomepage-thumbnail-container');
+  const videoOverlay = document.getElementById('jHomepage-video-overlay');
+  const loadingIndicator = document.getElementById('jHomepage-loading');
+  const centerPlayBtn = document.getElementById('jHomepage-center-play');
+  const bottomPlayBtn = document.getElementById('jHomepage-bottom-play');
+  const divider = document.getElementById('jHomepage-divider');
+  const labels = document.getElementById('jHomepage-labels');
+  
+  let video1, video2;
+  
+  if (isComparisonMode) {
+    video1 = document.getElementById('jHomepage-before-video');
+    video2 = document.getElementById('jHomepage-after-video');
+  } else {
+    video1 = document.getElementById('jHomepage-single-video');
+    video2 = null;
+  }
+  
+  let isDragging = false;
+  let videosLoaded = false;
+  let isPlaying = false;
+  let autoplayObserver;
+  let initialPosition = 50; // Start at 50%
+  
+  // Show loading indicator
+  function showLoading() {
+    if (loadingIndicator) {
+      loadingIndicator.style.display = 'block';
+    }
+  }
+  
+  // Hide loading indicator
+  function hideLoading() {
+    if (loadingIndicator) {
+      loadingIndicator.style.display = 'none';
+    }
+  }
+  
+  // Update video widths based on divider position
+  function updateVideoWidths(position) {
+    if (!video1 || !video2) return;
+    
+    video1.style.width = `${position}%`;
+    video2.style.width = `${100 - position}%`;
+    
+    // Update divider position
+    if (divider) {
+      divider.style.left = `${position}%`;
+    }
+  }
+  
+  // Initialize videos
+  function initVideos() {
+    if (!videosLoaded) {
+      showLoading();
+      
+      // Load videos
+      if (video1) {
+        video1.load();
+        video1.style.display = 'block';
+        video1.classList.add('jHomepage-block');
+        
+        // Wait for video to load
+        video1.addEventListener('loadeddata', function() {
+          hideLoading();
+        });
+        
+        video1.addEventListener('error', function() {
+          hideLoading();
+          console.error('Error loading before video');
+        });
+      }
+      
+      if (video2) {
+        video2.load();
+        video2.style.display = 'block';
+        video2.classList.add('jHomepage-block');
+        
+        video2.addEventListener('loadeddata', function() {
+          hideLoading();
+        });
+        
+        video2.addEventListener('error', function() {
+          hideLoading();
+          console.error('Error loading after video');
+        });
+      }
+      
+      // Hide thumbnail
+      if (thumbnailContainer) {
+        thumbnailContainer.style.display = 'none';
+      }
+      
+      // Show controls
+      centerPlayBtn.classList.add('jHomepage-hidden');
+      bottomPlayBtn.classList.remove('jHomepage-hidden');
+      bottomPlayBtn.classList.add('jHomepage-block');
+      
+      // Initialize comparison mode
+      if (isComparisonMode && video1 && video2) {
+        // Set initial positions (both videos side by side)
+        updateVideoWidths(initialPosition);
+        
+        // Show comparison controls
+        if (labels) {
+          labels.classList.remove('jHomepage-hidden');
+          labels.classList.add('jHomepage-show');
+        }
+        
+        if (divider) {
+          divider.classList.remove('jHomepage-hidden');
+          divider.classList.add('jHomepage-block');
+          divider.style.left = `${initialPosition}%`;
+        }
+      }
+      
+      videosLoaded = true;
+      
+      // Start playback if autoplay is enabled
+      if (enableAutoplay) {
+        setTimeout(playVideos, 300);
+      }
+    }
+  }
+  
+  // Play videos
+  function playVideos() {
+    if (!videosLoaded) {
+      initVideos();
+      return;
+    }
+    
+    const playPromises = [];
+    
+    if (video1) {
+      const promise1 = video1.play();
+      if (promise1 !== undefined) {
+        playPromises.push(promise1.catch(e => console.warn('Before video play failed:', e)));
+      }
+    }
+    
+    if (video2) {
+      const promise2 = video2.play();
+      if (promise2 !== undefined) {
+        playPromises.push(promise2.catch(e => console.warn('After video play failed:', e)));
+      }
+    }
+    
+    Promise.all(playPromises).then(() => {
+      isPlaying = true;
+      bottomPlayBtn.textContent = '❚❚';
+      bottomPlayBtn.setAttribute('aria-label', 'Pause video');
+    }).catch(() => {
+      // Handle autoplay restrictions
+      bottomPlayBtn.textContent = '▶';
+      bottomPlayBtn.setAttribute('aria-label', 'Play video');
+    });
+  }
+  
+  // Pause videos
+  function pauseVideos() {
+    if (video1) video1.pause();
+    if (video2) video2.pause();
+    
+    isPlaying = false;
+    bottomPlayBtn.textContent = '▶';
+    bottomPlayBtn.setAttribute('aria-label', 'Play video');
+  }
+  
+  // Toggle play/pause
+  function togglePlay() {
+    if (!videosLoaded) {
+      initVideos();
+      setTimeout(playVideos, 500);
+    } else if (isPlaying) {
+      pauseVideos();
+    } else {
+      playVideos();
+    }
+  }
+  
+  // Event Listeners
+  
+  // Center play button
+  centerPlayBtn?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    togglePlay();
+  });
+  
+  // Bottom play button
+  bottomPlayBtn?.addEventListener('click', function(e) {
+    e.stopPropagation();
+    togglePlay();
+  });
+  
+  // Click on video overlay
+  if (videoOverlay) {
+    videoOverlay.addEventListener('click', function() {
+      togglePlay();
+    });
+  }
+  
+  // Click on thumbnail container
+  if (thumbnailContainer) {
+    thumbnailContainer.addEventListener('click', function() {
+      togglePlay();
+    });
+  }
+  
+  // Click on video wrapper
+  const videoWrapper = document.querySelector('.jHomepage-video-wrapper');
+  if (videoWrapper) {
+    videoWrapper.addEventListener('click', function(e) {
+      // Only trigger if clicked directly on wrapper (not on buttons or divider)
+      if (e.target === this || e.target.classList.contains('jHomepage-video-container')) {
+        togglePlay();
+      }
+    });
+  }
+  
+  // Divider dragging functionality
+  if (isComparisonMode && divider) {
+    let startX, startLeft;
+    
+    divider.addEventListener('mousedown', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      startDragging(e.clientX);
+    });
+    
+    document.addEventListener('mousemove', function(e) {
+      if (isDragging && videosLoaded) {
+        handleDrag(e.clientX);
+      }
+    });
+    
+    document.addEventListener('mouseup', function() {
+      stopDragging();
+    });
+    
+    // Touch events for mobile
+    divider.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      if (e.touches.length === 1) {
+        startDragging(e.touches[0].clientX);
+      }
+    });
+    
+    document.addEventListener('touchmove', function(e) {
+      if (isDragging && videosLoaded && e.touches.length === 1) {
+        e.preventDefault();
+        handleDrag(e.touches[0].clientX);
+      }
+    });
+    
+    document.addEventListener('touchend', function() {
+      stopDragging();
+    });
+    
+    function startDragging(clientX) {
+      if (!videosLoaded) return;
+      
+      isDragging = true;
+      startX = clientX;
+      
+      // Get current position
+      const wrapper = document.querySelector('.jHomepage-video-wrapper');
+      if (wrapper) {
+        const wrapperRect = wrapper.getBoundingClientRect();
+        startLeft = ((parseFloat(divider.style.left) || initialPosition) / 100) * wrapperRect.width;
+      }
+      
+      divider.style.background = '{{ section.settings.primary_color }}';
+      document.body.style.cursor = 'ew-resize';
+      document.body.style.userSelect = 'none';
+    }
+    
+    function handleDrag(clientX) {
+      const wrapper = document.querySelector('.jHomepage-video-wrapper');
+      if (!wrapper) return;
+      
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const deltaX = clientX - startX;
+      const newLeft = Math.max(0, Math.min(wrapperRect.width, startLeft + deltaX));
+      const newPosition = (newLeft / wrapperRect.width) * 100;
+      
+      // Keep within bounds (10% to 90%)
+      const boundedPosition = Math.max(10, Math.min(90, newPosition));
+      
+      // Update video widths and divider position
+      updateVideoWidths(boundedPosition);
+    }
+    
+    function stopDragging() {
+      if (isDragging) {
+        isDragging = false;
+        divider.style.background = '{{ section.settings.secondary_color }}';
+        document.body.style.cursor = '';
+        document.body.style.userSelect = '';
+      }
+    }
+    
+    // Also allow dragging from the handle
+    const handle = divider.querySelector('.jHomepage-video-divider-handle');
+    if (handle) {
+      handle.addEventListener('mousedown', function(e) {
+        e.stopPropagation();
+        divider.dispatchEvent(new MouseEvent('mousedown', e));
+      });
+    }
+  }
+  
+  // Intersection Observer for autoplay
+  if (enableAutoplay) {
+    autoplayObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && videosLoaded && !isPlaying) {
+          playVideos();
+        } else if (videosLoaded && isPlaying) {
+          pauseVideos();
+        }
+      });
+    }, { 
+      threshold: 0.5,
+      rootMargin: '0px 0px -100px 0px'
+    });
+    
+    const videoSection = document.querySelector('.jHomepage-video-wrapper');
+    if (videoSection) {
+      autoplayObserver.observe(videoSection);
+    }
+  }
+  
+  // Handle video ended
+  if (video1) {
+    video1.addEventListener('ended', function() {
+      if (!video2 && {{ section.settings.enable_loop }}) {
+        video1.currentTime = 0;
+        video1.play();
+      }
+    });
+  }
+  
+  if (video2) {
+    video2.addEventListener('ended', function() {
+      if ({{ section.settings.enable_loop }}) {
+        video2.currentTime = 0;
+        video2.play();
+      }
+    });
+  }
+  
+  // Reset on window resize
+  let resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+      if (isComparisonMode && videosLoaded) {
+        updateVideoWidths(parseFloat(divider.style.left) || initialPosition);
+      }
+    }, 250);
+  });
+  
+  // Cleanup on page unload
+  window.addEventListener('beforeunload', function() {
+    if (autoplayObserver) {
+      autoplayObserver.disconnect();
+    }
+  });
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initVideoSection);
+
+// Re-initialize when section is added/edited in theme editor
+if (isShopifyEditor || isPreviewMode) {
+  document.addEventListener('shopify:section:load', initVideoSection);
+  document.addEventListener('shopify:section:unload', initVideoSection);
+  document.addEventListener('shopify:section:select', initVideoSection);
+  document.addEventListener('shopify:section:deselect', initVideoSection);
+}
+</script>
+
+{% schema %}
+{
+  "name": "Homepage Video Comparison",
+  "class": "jHomepage-video-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "See the Transformation"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Watch our amazing before and after comparison. Drag the slider to see the difference!</p>",
+      "info": "Description appears below the video"
+    },
+    {
+      "type": "header",
+      "content": "Video Configuration"
+    },
+    {
+      "type": "select",
+      "id": "video_mode",
+      "label": "Video Mode",
+      "options": [
+        {
+          "value": "single",
+          "label": "Single Video"
+        },
+        {
+          "value": "comparison",
+          "label": "Before/After Comparison"
+        }
+      ],
+      "default": "comparison",
+      "info": "Choose between single video or before/after comparison"
+    },
+    {
+      "type": "header",
+      "content": "Single Video Settings"
+    },
+    {
+      "type": "text",
+      "id": "single_video_url",
+      "label": "Single Video URL",
+      "info": "Enter YouTube/Vimeo URL or Shopify video file URL",
+      "default": "https://cdn.shopify.com/videos/c/vp/example/example.mp4"
+    },
+    {
+      "type": "image_picker",
+      "id": "single_thumbnail",
+      "label": "Single Video Thumbnail",
+      "info": "Recommended size: 1920x1080px"
+    },
+    {
+      "type": "header",
+      "content": "Before/After Video Settings"
+    },
+    {
+      "type": "text",
+      "id": "before_video_url",
+      "label": "Before Video URL",
+      "info": "Enter URL for the 'before' video",
+      "default": "https://cdn.shopify.com/videos/c/vp/before/before.mp4"
+    },
+    {
+      "type": "text",
+      "id": "after_video_url",
+      "label": "After Video URL",
+      "info": "Enter URL for the 'after' video",
+      "default": "https://cdn.shopify.com/videos/c/vp/after/after.mp4"
+    },
+    {
+      "type": "image_picker",
+      "id": "comparison_thumbnail",
+      "label": "Comparison Thumbnail",
+      "info": "Main thumbnail shown before playing videos. Recommended size: 1920x1080px"
+    },
+    {
+      "type": "text",
+      "id": "before_label",
+      "label": "Before Label Text",
+      "default": "BEFORE"
+    },
+    {
+      "type": "text",
+      "id": "after_label",
+      "label": "After Label Text",
+      "default": "AFTER"
+    },
+    {
+      "type": "header",
+      "content": "Design Settings"
+    },
+    {
+      "type": "color",
+      "id": "primary_color",
+      "label": "Primary Color",
+      "default": "#152C66"
+    },
+    {
+      "type": "color",
+      "id": "secondary_color",
+      "label": "Secondary Color",
+      "default": "#F67194"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_autoplay",
+      "label": "Enable Autoplay",
+      "default": false,
+      "info": "Videos will autoplay when section is in view"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_muted",
+      "label": "Mute Videos",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_loop",
+      "label": "Loop Videos",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section Padding Top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section Padding Bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "max_width",
+      "label": "Section Max Width",
+      "min": 800,
+      "max": 1920,
+      "step": 20,
+      "unit": "px",
+      "default": 1320
+    }
+  ],
+  "presets": [
+    {
+      "name": "Homepage Video Comparison",
+      "category": "Video",
+      "settings": {
+        "video_mode": "comparison",
+        "heading": "See the Transformation",
+        "description": "<p>Watch our amazing before and after comparison. Drag the slider to see the difference!</p>",
+        "before_label": "BEFORE",
+        "after_label": "AFTER",
+        "single_video_url": "https://cdn.shopify.com/videos/c/vp/example/example.mp4",
+        "before_video_url": "https://cdn.shopify.com/videos/c/vp/before/before.mp4",
+        "after_video_url": "https://cdn.shopify.com/videos/c/vp/after/after.mp4"
+      }
+    }
+  ]
+}
+{% endschema %}

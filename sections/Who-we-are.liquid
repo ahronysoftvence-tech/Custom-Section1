@@ -1,0 +1,1052 @@
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Custom CSS Variables */
+  .who-we-are-{{ section.id }} {
+    --small-heading-color: {{ section.settings.small_heading_color }};
+    --main-heading-color: {{ section.settings.main_heading_color }};
+    --description-color: {{ section.settings.description_color }};
+    --feature-title-color: {{ section.settings.feature_title_color }};
+    --feature-description-color: {{ section.settings.feature_description_color }};
+    --border-color: {{ section.settings.border_color }};
+    --column-gap: {{ section.settings.column_gap }}px;
+    --mobile-row-gap: {{ section.settings.mobile_row_gap }}px;
+  }
+
+  /* Small Heading */
+  .who-we-are-{{ section.id }} .who-we-are__small-heading {
+    font-size: {{ section.settings.small_heading_size_mobile }}px;
+    color: var(--small-heading-color);
+    margin-bottom: {{ section.settings.small_heading_spacing_mobile }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__small-heading {
+      font-size: {{ section.settings.small_heading_size }}px;
+      margin-bottom: {{ section.settings.small_heading_spacing }}px;
+    }
+  }
+
+  /* Main Heading */
+  .who-we-are-{{ section.id }} .who-we-are__main-heading {
+    font-size: {{ section.settings.main_heading_size_mobile }}px;
+    color: var(--main-heading-color);
+    margin-bottom: {{ section.settings.main_heading_spacing_mobile }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__main-heading {
+      font-size: {{ section.settings.main_heading_size }}px;
+      margin-bottom: {{ section.settings.main_heading_spacing }}px;
+    }
+  }
+
+  /* Description */
+  .who-we-are-{{ section.id }} .who-we-are__description {
+    font-size: {{ section.settings.description_size_mobile }}px;
+    color: var(--description-color);
+    margin-bottom: {{ section.settings.description_spacing_mobile }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__description {
+      font-size: {{ section.settings.description_size }}px;
+      margin-bottom: {{ section.settings.description_spacing }}px;
+    }
+  }
+
+  /* Feature Title */
+  .who-we-are-{{ section.id }} .who-we-are__feature-title {
+    font-size: {{ section.settings.feature_title_size_mobile }}px;
+    color: var(--feature-title-color);
+    margin-bottom: 8px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__feature-title {
+      font-size: {{ section.settings.feature_title_size }}px;
+    }
+  }
+
+  /* Feature Description */
+  .who-we-are-{{ section.id }} .who-we-are__feature-description {
+    font-size: {{ section.settings.feature_description_size_mobile }}px;
+    color: var(--feature-description-color);
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__feature-description {
+      font-size: {{ section.settings.feature_description_size }}px;
+    }
+  }
+
+  /* Image Border */
+  .who-we-are-{{ section.id }} .who-we-are__image-inner.has-dashed-border {
+    border: {{ section.settings.border_width }}px dashed var(--border-color);
+    padding: {{ section.settings.border_spacing }}px;
+  }
+
+  /* Icon Size */
+  .who-we-are-{{ section.id }} .who-we-are__feature-icon-wrapper {
+    width: {{ section.settings.icon_size_mobile }}px;
+    height: {{ section.settings.icon_size_mobile }}px;
+  }
+
+  .who-we-are-{{ section.id }} .who-we-are__feature-icon {
+    width: {{ section.settings.icon_size_mobile | times: 0.5 }}px;
+    height: {{ section.settings.icon_size_mobile | times: 0.5 }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__feature-icon-wrapper {
+      width: {{ section.settings.icon_size }}px;
+      height: {{ section.settings.icon_size }}px;
+    }
+
+    .who-we-are-{{ section.id }} .who-we-are__feature-icon {
+      width: {{ section.settings.icon_size | times: 0.5 }}px;
+      height: {{ section.settings.icon_size | times: 0.5 }}px;
+    }
+  }
+
+  /* Layout */
+  .who-we-are-{{ section.id }} .who-we-are__grid {
+    gap: var(--mobile-row-gap);
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__grid {
+      gap: var(--column-gap);
+    }
+  }
+
+  /* Image Width */
+  .who-we-are-{{ section.id }} .who-we-are__image-wrapper {
+    width: {{ section.settings.mobile_image_width }}%;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__image-wrapper {
+      width: {{ section.settings.image_width }}%;
+    }
+  }
+
+  /* Content Alignment */
+  .who-we-are-{{ section.id }} .who-we-are__content-column {
+    text-align: {{ section.settings.mobile_content_alignment }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__content-column {
+      text-align: {{ section.settings.content_alignment }};
+    }
+  }
+
+  /* Feature Alignment */
+  .who-we-are-{{ section.id }} .who-we-are__feature {
+    {% if section.settings.mobile_content_alignment == 'center' %}
+      justify-content: center;
+    {% elsif section.settings.mobile_content_alignment == 'right' %}
+      justify-content: flex-end;
+    {% else %}
+      justify-content: flex-start;
+    {% endif %}
+  }
+
+  .who-we-are-{{ section.id }} .who-we-are__feature-content {
+    text-align: {{ section.settings.mobile_content_alignment }};
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are-{{ section.id }} .who-we-are__feature {
+      {% if section.settings.content_alignment == 'center' %}
+        justify-content: center;
+      {% elsif section.settings.content_alignment == 'right' %}
+        justify-content: flex-end;
+      {% else %}
+        justify-content: flex-start;
+      {% endif %}
+    }
+
+    .who-we-are-{{ section.id }} .who-we-are__feature-content {
+      text-align: {{ section.settings.content_alignment }};
+    }
+  }
+{%- endstyle -%}
+
+<section class="color-{{ section.settings.color_scheme }} section-{{ section.id }}-padding who-we-are who-we-are-{{ section.id }}">
+  <div class="{% unless section.settings.full_width %}page-width{% endunless %}">
+    <div class="who-we-are__grid">
+      
+      <!-- Image Column -->
+      <div class="who-we-are__image-column {% if section.settings.mobile_image_first %}mobile-order-1{% else %}mobile-order-2{% endif %}">
+        <div class="who-we-are__image-wrapper">
+          <div class="who-we-are__image-inner {% if section.settings.show_dashed_border %}has-dashed-border{% endif %}">
+            {%- if section.settings.main_image != blank -%}
+              {%- assign image_alt = section.settings.main_image.alt | default: section.settings.main_heading | escape -%}
+              <img
+                srcset="
+                  {%- if section.settings.main_image.width >= 375 -%}{{ section.settings.main_image | image_url: width: 375 }} 375w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 550 -%}{{ section.settings.main_image | image_url: width: 550 }} 550w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 750 -%}{{ section.settings.main_image | image_url: width: 750 }} 750w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 1100 -%}{{ section.settings.main_image | image_url: width: 1100 }} 1100w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 1500 -%}{{ section.settings.main_image | image_url: width: 1500 }} 1500w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 1780 -%}{{ section.settings.main_image | image_url: width: 1780 }} 1780w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 2000 -%}{{ section.settings.main_image | image_url: width: 2000 }} 2000w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 3000 -%}{{ section.settings.main_image | image_url: width: 3000 }} 3000w,{%- endif -%}
+                  {%- if section.settings.main_image.width >= 3840 -%}{{ section.settings.main_image | image_url: width: 3840 }} 3840w,{%- endif -%}
+                  {{ section.settings.main_image | image_url }} {{ section.settings.main_image.width }}w
+                "
+                src="{{ section.settings.main_image | image_url: width: 1500 }}"
+                sizes="(min-width: 768px) {% if section.settings.image_width < 50 %}40vw{% else %}50vw{% endif %}, 100vw"
+                alt="{{ image_alt }}"
+                class="who-we-are__image"
+                loading="lazy"
+                width="{{ section.settings.main_image.width }}"
+                height="{{ section.settings.main_image.height }}"
+              >
+            {%- else -%}
+              <div class="who-we-are__image-placeholder">
+                {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Column -->
+      <div class="who-we-are__content-column {% if section.settings.mobile_image_first %}mobile-order-2{% else %}mobile-order-1{% endif %}">
+        {%- if section.settings.small_heading != blank -%}
+          <div class="who-we-are__small-heading">
+            {{ section.settings.small_heading }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.main_heading != blank -%}
+          <h2 class="who-we-are__main-heading">
+            {{ section.settings.main_heading }}
+          </h2>
+        {%- endif -%}
+
+        {%- if section.settings.description != blank -%}
+          <div class="who-we-are__description">
+            {{ section.settings.description }}
+          </div>
+        {%- endif -%}
+
+        {%- if section.blocks.size > 0 -%}
+          <div class="who-we-are__features">
+            {%- for block in section.blocks -%}
+              <div class="who-we-are__feature" {{ block.shopify_attributes }}>
+                {%- if block.settings.icon != blank or block.settings.icon_svg != blank -%}
+                  <div class="who-we-are__feature-icon-wrapper" style="background-color: {{ block.settings.icon_bg_color }};">
+                    {%- if block.settings.icon != blank -%}
+                      {%- assign icon_alt = block.settings.title | default: 'Feature icon' | escape -%}
+                      <img
+                        src="{{ block.settings.icon | image_url: width: 100 }}"
+                        alt="{{ icon_alt }}"
+                        class="who-we-are__feature-icon"
+                        loading="lazy"
+                        width="100"
+                        height="100"
+                      >
+                    {%- elsif block.settings.icon_svg != blank -%}
+                      <div class="who-we-are__feature-icon-svg">
+                        {{ block.settings.icon_svg }}
+                      </div>
+                    {%- endif -%}
+                  </div>
+                {%- endif -%}
+                
+                <div class="who-we-are__feature-content">
+                  {%- if block.settings.title != blank -%}
+                    <h3 class="who-we-are__feature-title">
+                      {{ block.settings.title }}
+                    </h3>
+                  {%- endif -%}
+                  
+                  {%- if block.settings.description != blank -%}
+                    <div class="who-we-are__feature-description">
+                      {{ block.settings.description }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Base Styles */
+  .who-we-are {
+    width: 100%;
+  }
+
+  .who-we-are__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are__grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .who-we-are__image-column {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .who-we-are__image-wrapper {
+    position: relative;
+    max-width: 100%;
+  }
+
+  .who-we-are__image-inner {
+    position: relative;
+    border-radius: 50%;
+    overflow: hidden;
+    aspect-ratio: 1 / 1;
+  }
+
+  .who-we-are__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+
+  .who-we-are__image-placeholder {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(var(--color-foreground), 0.04);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .who-we-are__image-placeholder .placeholder-svg {
+    width: 60%;
+    height: 60%;
+    fill: rgba(var(--color-foreground), 0.2);
+  }
+
+  .who-we-are__content-column {
+    width: 100%;
+  }
+
+  .who-we-are__small-heading {
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .who-we-are__main-heading {
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  .who-we-are__description {
+    line-height: 1.6;
+  }
+
+  .who-we-are__features {
+    display: flex;
+    flex-direction: column;
+    gap: {{ section.settings.features_gap_mobile }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are__features {
+      gap: {{ section.settings.features_gap }}px;
+    }
+  }
+
+  .who-we-are__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: {{ section.settings.feature_icon_gap_mobile }}px;
+  }
+
+  @media screen and (min-width: 768px) {
+    .who-we-are__feature {
+      gap: {{ section.settings.feature_icon_gap }}px;
+    }
+  }
+
+  .who-we-are__feature-icon-wrapper {
+    flex-shrink: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .who-we-are__feature-icon {
+    object-fit: contain;
+  }
+
+  .who-we-are__feature-icon-svg svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .who-we-are__feature-content {
+    flex: 1;
+  }
+
+  .who-we-are__feature-title {
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .who-we-are__feature-description {
+    line-height: 1.5;
+  }
+
+  /* Mobile Order Classes */
+  .mobile-order-1 {
+    order: 1;
+  }
+
+  .mobile-order-2 {
+    order: 2;
+  }
+
+  @media screen and (min-width: 768px) {
+    .mobile-order-1,
+    .mobile-order-2 {
+      order: unset;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Who We Are",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "Full width",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "options": [
+        {
+          "value": "accent-1",
+          "label": "Accent 1"
+        },
+        {
+          "value": "accent-2",
+          "label": "Accent 2"
+        },
+        {
+          "value": "background-1",
+          "label": "Background 1"
+        },
+        {
+          "value": "background-2",
+          "label": "Background 2"
+        },
+        {
+          "value": "inverse",
+          "label": "Inverse"
+        }
+      ],
+      "default": "background-1",
+      "label": "Color scheme"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop padding top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop padding bottom",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile padding top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile padding bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Image Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Image"
+    },
+    {
+      "type": "range",
+      "id": "image_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Desktop image width",
+      "default": 90
+    },
+    {
+      "type": "range",
+      "id": "mobile_image_width",
+      "min": 50,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "label": "Mobile image width",
+      "default": 80
+    },
+    {
+      "type": "select",
+      "id": "image_alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "flex-end",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Image alignment"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dashed_border",
+      "label": "Show dashed border",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "border_width",
+      "min": 1,
+      "max": 10,
+      "step": 1,
+      "unit": "px",
+      "label": "Border width",
+      "default": 2
+    },
+    {
+      "type": "color",
+      "id": "border_color",
+      "label": "Border color",
+      "default": "#3eb489"
+    },
+    {
+      "type": "range",
+      "id": "border_spacing",
+      "min": 5,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Border spacing",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "left",
+      "label": "Desktop content alignment"
+    },
+    {
+      "type": "select",
+      "id": "mobile_content_alignment",
+      "options": [
+        {
+          "value": "left",
+          "label": "Left"
+        },
+        {
+          "value": "center",
+          "label": "Center"
+        },
+        {
+          "value": "right",
+          "label": "Right"
+        }
+      ],
+      "default": "center",
+      "label": "Mobile content alignment"
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "text",
+      "id": "small_heading",
+      "label": "Small heading",
+      "default": "WHO WE ARE"
+    },
+    {
+      "type": "range",
+      "id": "small_heading_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop small heading size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "small_heading_size_mobile",
+      "min": 10,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile small heading size",
+      "default": 12
+    },
+    {
+      "type": "color",
+      "id": "small_heading_color",
+      "label": "Small heading color",
+      "default": "#3eb489"
+    },
+    {
+      "type": "range",
+      "id": "small_heading_spacing",
+      "min": 0,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop spacing below",
+      "default": 15
+    },
+    {
+      "type": "range",
+      "id": "small_heading_spacing_mobile",
+      "min": 0,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile spacing below",
+      "default": 10
+    },
+    {
+      "type": "text",
+      "id": "main_heading",
+      "label": "Main heading",
+      "default": "Caring for Your Little Ones"
+    },
+    {
+      "type": "range",
+      "id": "main_heading_size",
+      "min": 20,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Desktop main heading size",
+      "default": 42
+    },
+    {
+      "type": "range",
+      "id": "main_heading_size_mobile",
+      "min": 18,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "label": "Mobile main heading size",
+      "default": 28
+    },
+    {
+      "type": "color",
+      "id": "main_heading_color",
+      "label": "Main heading color",
+      "default": "#222222"
+    },
+    {
+      "type": "range",
+      "id": "main_heading_spacing",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop spacing below",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "main_heading_spacing_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile spacing below",
+      "default": 15
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>We are dedicated to providing the highest quality baby care products that are safe, gentle, and effective for your precious little ones.</p>"
+    },
+    {
+      "type": "range",
+      "id": "description_size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop description size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "description_size_mobile",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile description size",
+      "default": 14
+    },
+    {
+      "type": "color",
+      "id": "description_color",
+      "label": "Description color",
+      "default": "#666666"
+    },
+    {
+      "type": "range",
+      "id": "description_spacing",
+      "min": 0,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop spacing below",
+      "default": 30
+    },
+    {
+      "type": "range",
+      "id": "description_spacing_mobile",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile spacing below",
+      "default": 20
+    },
+    {
+      "type": "header",
+      "content": "Features Layout"
+    },
+    {
+      "type": "range",
+      "id": "features_gap",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop gap between features",
+      "default": 25
+    },
+    {
+      "type": "range",
+      "id": "features_gap_mobile",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile gap between features",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "column_gap",
+      "min": 20,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Desktop column gap",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "mobile_row_gap",
+      "min": 20,
+      "max": 100,
+      "step": 10,
+      "unit": "px",
+      "label": "Mobile row gap",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Feature Icons"
+    },
+    {
+      "type": "range",
+      "id": "icon_size",
+      "min": 40,
+      "max": 120,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop icon size",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "icon_size_mobile",
+      "min": 30,
+      "max": 80,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile icon size",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_gap",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "unit": "px",
+      "label": "Desktop icon to text gap",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "feature_icon_gap_mobile",
+      "min": 10,
+      "max": 40,
+      "step": 5,
+      "unit": "px",
+      "label": "Mobile icon to text gap",
+      "default": 15
+    },
+    {
+      "type": "header",
+      "content": "Feature Typography"
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size",
+      "min": 14,
+      "max": 32,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop feature title size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "feature_title_size_mobile",
+      "min": 14,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile feature title size",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "feature_title_color",
+      "label": "Feature title color",
+      "default": "#222222"
+    },
+    {
+      "type": "range",
+      "id": "feature_description_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Desktop feature description size",
+      "default": 14
+    },
+    {
+      "type": "range",
+      "id": "feature_description_size_mobile",
+      "min": 12,
+      "max": 18,
+      "step": 1,
+      "unit": "px",
+      "label": "Mobile feature description size",
+      "default": 13
+    },
+    {
+      "type": "color",
+      "id": "feature_description_color",
+      "label": "Feature description color",
+      "default": "#666666"
+    },
+    {
+      "type": "header",
+      "content": "Mobile Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "mobile_image_first",
+      "label": "Show image first on mobile",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature",
+      "settings": [
+        {
+          "type": "header",
+          "content": "Icon"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon image",
+          "info": "Upload a square icon image"
+        },
+        {
+          "type": "textarea",
+          "id": "icon_svg",
+          "label": "SVG icon code",
+          "info": "Alternative to image icon, paste SVG code here"
+        },
+        {
+          "type": "color",
+          "id": "icon_bg_color",
+          "label": "Icon background color",
+          "default": "#ffeef0"
+        },
+        {
+          "type": "header",
+          "content": "Content"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "100% Natural"
+        },
+        {
+          "type": "richtext",
+          "id": "description",
+          "label": "Description",
+          "default": "<p>All our products are made with natural ingredients</p>"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [
+    {
+      "name": "Who We Are",
+      "blocks": [
+        {
+          "type": "feature",
+          "settings": {
+            "title": "100% Natural",
+            "description": "<p>All our products are made with natural ingredients</p>",
+            "icon_bg_color": "#ffeef0"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Dermatologist Tested",
+            "description": "<p>Clinically tested and approved by pediatric dermatologists</p>",
+            "icon_bg_color": "#e8f5f1"
+          }
+        },
+        {
+          "type": "feature",
+          "settings": {
+            "title": "Hypoallergenic",
+            "description": "<p>Gentle formulas perfect for sensitive baby skin</p>",
+            "icon_bg_color": "#fff4e6"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
