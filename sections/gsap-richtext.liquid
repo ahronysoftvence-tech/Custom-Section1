@@ -196,19 +196,10 @@
     }
   }
 
-  /* ---------------------------------------------------------------------
-     GSAP text animation — hidden-until-JS states.
-     The .rt-js class is added synchronously the moment this section's
-     markup is parsed, so there is no flash of visible-then-hidden content.
-     If JavaScript is disabled, .rt-js never gets added and everything just
-     renders normally (no broken/invisible content).
-  --------------------------------------------------------------------- */
-
   .rt-js .nv-richtext__heading.rt-anim-heading {
     color: var(--rt-color-start);
   }
 
-  /* Subheading: letters type on, one by one, dropping in from above */
   .rt-js .rt-char {
     display: inline-block;
     opacity: 0;
@@ -216,7 +207,6 @@
     will-change: transform, opacity;
   }
 
-  /* Heading: whole words fly in diagonally from the top right */
   .rt-js .rt-word {
     display: inline-block;
     opacity: 0;
@@ -229,14 +219,12 @@
     width: 0.3em;
   }
 
-  /* Body text: each paragraph/element slides in from the left */
   .rt-js .nv-richtext__text.rt-anim-text > * {
     opacity: 0;
     transform: translateX(-48px);
     will-change: transform, opacity;
   }
 
-  /* Button: comes up from below last, landing with a bounce */
   .rt-js .rt-anim-fade {
     opacity: 0;
     transform: translateY(36px) scale(0.9);
@@ -297,12 +285,6 @@
     const textChildren = root.querySelectorAll('.rt-anim-text > *');
     const button = root.querySelector('[data-rt-block="button"]');
 
-    // Block-wise reveal, one block after another, each with its own entrance
-    // direction. toggleActions plays it on the way in and REVERSES it on the
-    // way out, so text comes in and goes back out as you scroll past it.
-    // ScrollTrigger evaluates the trigger's position the moment it's created,
-    // so a section that's already in view on page load (e.g. near the top
-    // of the page) plays immediately — no scrolling required to see it.
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: root,
@@ -312,7 +294,6 @@
       }
     });
 
-    // 1) Subheading — letters type on one by one, dropping from above.
     if (letters.length) {
       tl.to(letters, {
         opacity: 1,
@@ -323,7 +304,6 @@
       }, 0);
     }
 
-    // 2) Heading — whole words fly in diagonally from the top right.
     if (words.length) {
       tl.to(words, {
         opacity: 1,
@@ -337,7 +317,6 @@
       }, 0.25);
     }
 
-    // 3) Body text — each paragraph slides in from the left.
     if (textChildren.length) {
       tl.to(textChildren, {
         opacity: 1,
@@ -348,7 +327,6 @@
       }, 0.55);
     }
 
-    // 4) Button — comes last, rising up from below and landing with a bounce.
     if (button) {
       tl.to(button, {
         opacity: 1,
@@ -359,9 +337,6 @@
       }, '>-0.1');
     }
 
-    // Heading color shift, scrubbed to scroll position as the section moves
-    // through the viewport (separate from the timeline above, so it keeps
-    // tracking scroll continuously rather than firing once).
     if (heading) {
       const endColor = getComputedStyle(root).getPropertyValue('--rt-color-end').trim();
       gsap.to(heading, {
@@ -379,8 +354,6 @@
 
   const initAll = () => {
     document.querySelectorAll('.nv-richtext.rt-js').forEach(initSection);
-    // Positions can shift slightly once fonts/images finish loading, so
-    // double-check after full load that already-visible sections played.
     window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
   };
 
