@@ -1,196 +1,246 @@
-{{ 'liquid-richtext' | append: '' }}
-{%- comment -%}
-  Section: Liquid Rich Text
-  A rich text block themed around ink dissolving into water — a distorted,
-  slowly-morphing SVG blob (SVG feTurbulence + feDisplacementMap, driven by
-  GSAP) sits behind an editorial heading/body pair. The heading splits into
-  words that rise through a clipped "surface" on scroll; the body content
-  fades up paragraph by paragraph. No paid GSAP plugins are used — everything
-  runs on the free GSAP core + ScrollTrigger, loaded from cdnjs on demand.
-{%- endcomment -%}
+{% liquid 
+  # Padding: use one desktop value and scale it for laptop, tablet, and mobile
+  assign padding_top = section.settings.padding_top | default: 0
+  assign laptop_padding_top = padding_top | times: 80 | divided_by: 100
+  assign tab_padding_top = laptop_padding_top | times: 80 | divided_by: 100
+  assign mobile_padding_top = tab_padding_top | times: 50 | divided_by: 100
 
-<section
-  class="liquid-rt liquid-rt--{{ section.settings.content_alignment }}"
-  id="liquid-rt-{{ section.id }}"
-  data-liquid-rt
-  style="
-    --rt-pt: {{ section.settings.padding_top }}px;
-    --rt-pb: {{ section.settings.padding_bottom }}px;
-    --rt-accent: {{ section.settings.accent_color }};
-    --rt-accent-2: {{ section.settings.accent_color_2 }};
-  "
+  assign padding_bottom = section.settings.padding_bottom | default: 0
+  assign laptop_padding_bottom = padding_bottom | times: 80 | divided_by: 100
+  assign tab_padding_bottom = laptop_padding_bottom | times: 80 | divided_by: 100
+  assign mobile_padding_bottom = tab_padding_bottom | times: 50 | divided_by: 100
+
+  # margin: use one desktop value and scale it for laptop, tablet, and mobile
+  assign margin_top = section.settings.margin_top | default: 0
+  assign laptop_margin_top = margin_top | times: 80 | divided_by: 100
+  assign tab_margin_top = laptop_margin_top | times: 80 | divided_by: 100
+  assign mobile_margin_top = tab_margin_top | times: 50 | divided_by: 100
+
+  assign margin_bottom = section.settings.margin_bottom | default: 0
+  assign laptop_margin_bottom = margin_bottom | times: 80 | divided_by: 100
+  assign tab_margin_bottom = laptop_margin_bottom | times: 80 | divided_by: 100
+  assign mobile_margin_bottom = tab_margin_bottom | times: 50 | divided_by: 100
+%}
+
+<div
+  class="shopify-section-{{ section.id }} nv-richtext nv-richtext-{{ section.id }} color-{{ section.settings.color_schemes }}"
+  id="nv-richtext-{{ section.id }}"
+  style="--rt-color-start: {{ section.settings.animation_start_color }}; --rt-color-end: {{ section.settings.animation_end_color }};"
 >
-  <svg class="liquid-rt__defs" width="0" height="0" aria-hidden="true" focusable="false">
-    <filter id="liquid-turb-{{ section.id }}" x="-40%" y="-40%" width="180%" height="180%">
-      <feTurbulence
-        type="fractalNoise"
-        baseFrequency="0.012 0.018"
-        numOctaves="2"
-        seed="7"
-        result="rt-noise"
-        data-rt-turbulence
-      />
-      <feDisplacementMap
-        in="SourceGraphic"
-        in2="rt-noise"
-        scale="0"
-        xChannelSelector="R"
-        yChannelSelector="G"
-        data-rt-displace
-      />
-    </filter>
-    <linearGradient id="liquid-grad-{{ section.id }}" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="var(--rt-accent)" stop-opacity="0.85" />
-      <stop offset="100%" stop-color="var(--rt-accent-2)" stop-opacity="0.55" />
-    </linearGradient>
-  </svg>
+  {%- if section.settings.enable_scroll_animation -%}
+    <script>
+      (function () {
+        var el = document.getElementById('nv-richtext-{{ section.id }}');
+        if (el) el.classList.add('rt-js');
+      })();
+    </script>
+  {%- endif -%}
 
-  <div class="liquid-rt__blob" aria-hidden="true" data-rt-blob>
-    <svg viewBox="0 0 600 600" preserveAspectRatio="xMidYMid slice">
-      <g filter="url(#liquid-turb-{{ section.id }})">
-        <ellipse cx="230" cy="260" rx="230" ry="190" fill="url(#liquid-grad-{{ section.id }})" />
-        <ellipse cx="390" cy="360" rx="150" ry="120" fill="var(--rt-accent)" opacity="0.28" />
-      </g>
-    </svg>
+  <div class="container">
+    <div class="nv-richtext__wrapper" style="text-align: {{ section.settings.content_alignment }};">
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when '@app' %}
+            <div class="nv-richtext__app" {{ block.shopify_attributes }}>
+              {% render block %}
+            </div>
+
+          {% when 'subheading' %}
+            {% if block.settings.subheading != blank %}
+              <div class="nv-richtext__subheading rt-anim-fade" data-rt-block="subheading" {{ block.shopify_attributes }}>
+                {{ block.settings.subheading }}
+              </div>
+            {% endif %}
+
+          {% when 'heading' %}
+            {% if block.settings.heading != blank %}
+              {% assign rt_heading_words = block.settings.heading | split: ' ' %}
+              {% if block.settings.heading_size == 'h1' %}
+                <h1 class="nv-richtext__heading nv-richtext__heading--h1 rt-anim-heading" data-rt-block="heading" {{ block.shopify_attributes }}>
+                  {% for word in rt_heading_words %}<span class="rt-word"><span class="rt-word-inner">{{ word }}</span></span>{% unless forloop.last %} {% endunless %}{% endfor %}
+                </h1>
+              {% elsif block.settings.heading_size == 'h3' %}
+                <h3 class="nv-richtext__heading nv-richtext__heading--h3 rt-anim-heading" data-rt-block="heading" {{ block.shopify_attributes }}>
+                  {% for word in rt_heading_words %}<span class="rt-word"><span class="rt-word-inner">{{ word }}</span></span>{% unless forloop.last %} {% endunless %}{% endfor %}
+                </h3>
+              {% else %}
+                <h2 class="nv-richtext__heading nv-richtext__heading--h2 rt-anim-heading" data-rt-block="heading" {{ block.shopify_attributes }}>
+                  {% for word in rt_heading_words %}<span class="rt-word"><span class="rt-word-inner">{{ word }}</span></span>{% unless forloop.last %} {% endunless %}{% endfor %}
+                </h2>
+              {% endif %}
+            {% endif %}
+
+          {% when 'text' %}
+            {% if block.settings.text != blank %}
+              <div class="nv-richtext__text rte rt-anim-text" data-rt-block="text" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </div>
+            {% endif %}
+
+          {% when 'button' %}
+            {% if block.settings.button_label != blank %}
+              <a
+                href="{{ block.settings.button_link }}"
+                class="nv-richtext__button nv-btn-bg nv-btn-animation rt-anim-fade"
+                data-rt-block="button"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.button_label }}
+              </a>
+            {% endif %}
+
+        {% endcase %}
+      {% endfor %}
+
+    </div>
   </div>
+</div>
 
-  <div class="liquid-rt__inner">
-    {%- if section.settings.eyebrow_text != blank -%}
-      <p class="liquid-rt__eyebrow" data-rt-eyebrow>{{ section.settings.eyebrow_text }}</p>
-    {%- endif -%}
+{% style %}
+ /* Mobile: base spacing and single-column grid */
+  .shopify-section-{{ section.id }} {
+    padding-top: {{ mobile_padding_top }}px;
+    padding-bottom: {{ mobile_padding_bottom }}px;
+    margin-top: {{ mobile_margin_top }}px;
+    margin-bottom: {{ mobile_margin_bottom }}px;
+  }
 
-    <h2 class="liquid-rt__heading" data-rt-heading aria-label="{{ section.settings.heading | strip_html }}">
-      {%- assign rt_words = section.settings.heading | split: ' ' -%}
-      {%- for word in rt_words -%}
-        <span class="liquid-rt__word"><span class="liquid-rt__word-inner">{{ word }}</span></span>{% unless forloop.last %} {% endunless %}
-      {%- endfor -%}
-    </h2>
+  .shopify-section-{{ section.id }}
+  .container {
+    margin-top: 1.25rem;
+  }
 
-    {%- if section.settings.body != blank -%}
-      <div class="liquid-rt__body rte" data-rt-body>
-        {{ section.settings.body }}
-      </div>
-    {%- endif -%}
+  @media (min-width: 768px) {
+    /* Tablet: use tablet padding and column setting */
+    .shopify-section-{{ section.id }} {
+      padding-top: {{ tab_padding_top }}px;
+      padding-bottom: {{ tab_padding_bottom }}px;
+      margin-top: {{ tab_margin_top }}px;
+      margin-bottom: {{ tab_margin_bottom }}px;
+    }
 
-    {%- if section.settings.show_button and section.settings.button_label != blank -%}
-      <a
-        href="{{ section.settings.button_link | default: '#' }}"
-        class="liquid-rt__button"
-        data-rt-button
-      >
-        <span>{{ section.settings.button_label }}</span>
-      </a>
-    {%- endif -%}
-  </div>
-</section>
+    .shopify-section-{{ section.id }}
+    .container {
+      margin-top: 2rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    /* Laptop: laptop padding and columns */
+    .shopify-section-{{ section.id }} {
+      padding-top: {{ laptop_padding_top }}px;
+      padding-bottom: {{ laptop_padding_bottom }}px;
+      margin-top: {{ laptop_margin_top }}px;
+      margin-bottom: {{ laptop_margin_bottom }}px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    /* Desktop: full padding and desktop columns */
+    .shopify-section-{{ section.id }} {
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      margin-top: {{ margin_top }}px;
+      margin-bottom: {{ margin_bottom }}px;
+    }
+  }
+{% endstyle %}
 
 {% stylesheet %}
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600&family=Newsreader:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Mono:wght@500&display=swap');
 
-.liquid-rt {
-  position: relative;
-  overflow: hidden;
-  padding-top: var(--rt-pt, 96px);
-  padding-bottom: var(--rt-pb, 96px);
-  padding-left: clamp(20px, 5vw, 64px);
-  padding-right: clamp(20px, 5vw, 64px);
-  background: radial-gradient(120% 140% at 20% 0%, #163534 0%, #0c1b1e 55%, #0a1516 100%);
-  color: #ece4d0;
-  isolation: isolate;
-}
+  .nv-richtext__wrapper {
+    margin: 0 auto;
+  }
 
-.liquid-rt__defs { position: absolute; width: 0; height: 0; }
+  .nv-richtext__subheading {
+    margin-bottom: 12px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
 
-.liquid-rt__blob {
-  position: absolute;
-  inset: -10% -10% -10% auto;
-  width: min(60vw, 720px);
-  height: 100%;
-  right: -6%;
-  top: 0;
-  opacity: 0.9;
-  filter: blur(0.5px);
-  pointer-events: none;
-  z-index: 0;
-  mix-blend-mode: screen;
-}
-.liquid-rt__blob svg { width: 100%; height: 100%; }
+  .nv-richtext__heading {
+    margin: 0 0 20px;
+    line-height: 1.15;
+    font-weight: 600;
+  }
 
-.liquid-rt__inner {
-  position: relative;
-  z-index: 1;
-  max-width: 760px;
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
-}
-.liquid-rt--center { margin-inline: auto; align-items: center; text-align: center; }
-.liquid-rt--center .liquid-rt__heading { justify-content: center; }
-.liquid-rt--center .liquid-rt__body { text-align: left; }
+  .nv-richtext__heading--h1 { font-size: 48px; }
+  .nv-richtext__heading--h2 { font-size: 38px; }
+  .nv-richtext__heading--h3 { font-size: 30px; }
 
-.liquid-rt__eyebrow {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--rt-accent);
-  margin: 0;
-  opacity: 0;
-}
+  .nv-richtext__text {
+   font-size: 18px;
+  }
 
-.liquid-rt__heading {
-  font-family: 'Fraunces', serif;
-  font-weight: 600;
-  font-size: clamp(32px, 5vw, 58px);
-  line-height: 1.08;
-  letter-spacing: -0.01em;
-  margin: 0;
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 0.05em;
-  column-gap: 0.22em;
-}
-.liquid-rt__word { overflow: hidden; display: inline-block; }
-.liquid-rt__word-inner { display: inline-block; will-change: transform; transform: translateY(115%); }
+  .nv-richtext__text p:last-child {
+    margin-bottom: 0;
+  }
 
-.liquid-rt__body {
-  font-family: 'Newsreader', serif;
-  font-size: 18px;
-  line-height: 1.7;
-  color: #cfd8d2;
-  max-width: 58ch;
-}
-.liquid-rt__body > * { opacity: 0; transform: translateY(18px); }
-.liquid-rt__body p + p { margin-top: 1em; }
-.liquid-rt__body a { color: var(--rt-accent); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  .nv-richtext__button {
+    display: block;
+    width: fit-content;
+    margin: 28px auto 0;
+  }
 
-.liquid-rt__button {
-  align-self: flex-start;
-  position: relative;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #0c1b1e;
-  background: var(--rt-accent);
-  padding: 14px 26px;
-  border-radius: 999px;
-  text-decoration: none;
-  opacity: 0;
-  transform: translateY(14px) scale(0.98);
-}
-.liquid-rt--center .liquid-rt__button { align-self: center; }
+  @media screen and (max-width: 749px) {
+    .nv-richtext__heading--h1 { font-size: 34px; }
+    .nv-richtext__heading--h2 { font-size: 28px; }
+    .nv-richtext__heading--h3 { font-size: 24px; }
 
-@media (max-width: 700px) {
-  .liquid-rt__blob { width: 90vw; right: -20%; opacity: 0.6; }
-}
+    .nv-richtext__text {
+      font-size: 16px;
+    }
+  }
 
-@media (prefers-reduced-motion: reduce) {
-  .liquid-rt__word-inner { transform: none; }
-  .liquid-rt__eyebrow, .liquid-rt__body > *, .liquid-rt__button { opacity: 1; transform: none; }
-}
+  /* ---------------------------------------------------------------------
+     GSAP text animation — hidden-until-JS states.
+     The .rt-js class is added synchronously the moment this section's
+     markup is parsed, so there is no flash of visible-then-hidden content.
+     If JavaScript is disabled, .rt-js never gets added and everything just
+     renders normally (no broken/invisible content).
+  --------------------------------------------------------------------- */
+
+  .rt-js .nv-richtext__heading.rt-anim-heading {
+    color: var(--rt-color-start);
+  }
+
+  .rt-js .rt-word {
+    overflow: hidden;
+    display: inline-block;
+  }
+
+  .rt-js .rt-word-inner {
+    display: inline-block;
+    will-change: transform, filter;
+    transform: translateY(115%);
+    filter: blur(6px);
+  }
+
+  .rt-js .rt-anim-fade {
+    opacity: 0;
+    transform: translateY(22px);
+    will-change: transform, opacity;
+  }
+
+  .rt-js .nv-richtext__text.rt-anim-text > * {
+    opacity: 0;
+    transform: translateY(18px);
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rt-js .nv-richtext__heading.rt-anim-heading { color: inherit; }
+    .rt-js .rt-word-inner { transform: none; filter: none; }
+    .rt-js .rt-anim-fade { opacity: 1; transform: none; }
+    .rt-js .nv-richtext__text.rt-anim-text > * { opacity: 1; transform: none; }
+  }
+
 {% endstylesheet %}
 
+{% if section.settings.enable_scroll_animation %}
 <script>
 (function () {
   var CDN = {
@@ -230,189 +280,262 @@
     if (!root || root.dataset.rtInitialized) return;
     root.dataset.rtInitialized = 'true';
 
-    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var eyebrow = root.querySelector('[data-rt-eyebrow]');
-    var words = root.querySelectorAll('.liquid-rt__word-inner');
-    var body = root.querySelector('[data-rt-body]');
-    var bodyChildren = body ? Array.prototype.slice.call(body.children) : [];
-    var button = root.querySelector('[data-rt-button]');
-    var turbulence = root.querySelector('[data-rt-turbulence]');
-    var displace = root.querySelector('[data-rt-displace]');
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    if (prefersReduced) return;
+    var heading = root.querySelector('.rt-anim-heading');
+    var words = root.querySelectorAll('.rt-word-inner');
+    var subheading = root.querySelector('[data-rt-block="subheading"]');
+    var textChildren = root.querySelectorAll('.rt-anim-text > *');
+    var button = root.querySelector('[data-rt-block="button"]');
 
+    // 1) Block-wise reveal that plays on the way in and REVERSES on the way
+    //    out — text comes in and goes back out as you scroll past it.
     var tl = gsap.timeline({
       scrollTrigger: {
         trigger: root,
-        start: 'top 75%',
-        once: true
+        start: 'top 82%',
+        end: 'bottom 18%',
+        toggleActions: 'play reverse play reverse'
       }
     });
 
-    if (eyebrow) {
-      tl.to(eyebrow, { opacity: 1, duration: 0.6, ease: 'power2.out' }, 0);
+    if (subheading) {
+      tl.to(subheading, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, 0);
     }
     if (words.length) {
       tl.to(words, {
         y: '0%',
-        duration: 1.1,
+        filter: 'blur(0px)',
+        duration: 0.9,
         ease: 'power4.out',
-        stagger: 0.045
-      }, 0.15);
+        stagger: 0.04
+      }, 0.1);
     }
-    if (bodyChildren.length) {
-      tl.to(bodyChildren, {
+    if (textChildren.length) {
+      tl.to(textChildren, {
         opacity: 1,
         y: 0,
-        duration: 0.9,
+        duration: 0.7,
         ease: 'power3.out',
-        stagger: 0.12
-      }, 0.5);
+        stagger: 0.1
+      }, 0.35);
     }
     if (button) {
-      tl.to(button, { opacity: 1, y: 0, scale: 1, duration: 0.7, ease: 'back.out(1.7)' }, '>-0.3');
+      tl.to(button, { opacity: 1, y: 0, duration: 0.6, ease: 'back.out(1.7)' }, '>-0.2');
     }
 
-    // Liquid blob: displacement "surfaces" in on scroll, then idles with a slow ripple.
-    if (turbulence && displace) {
-      gsap.timeline({
-        scrollTrigger: { trigger: root, start: 'top 80%', once: true }
-      }).to(displace, { attr: { scale: 42 }, duration: 1.6, ease: 'power2.out' })
-        .add(function () {
-          var proxy = { freq: 0.012 };
-          gsap.to(proxy, {
-            freq: 0.02,
-            duration: 6,
-            ease: 'sine.inOut',
-            repeat: -1,
-            yoyo: true,
-            onUpdate: function () {
-              turbulence.setAttribute('baseFrequency', proxy.freq + ' ' + (proxy.freq * 1.5).toFixed(4));
-            }
-          });
-        });
+    // 2) Heading color shift, scrubbed to scroll position as the section
+    //    passes through the viewport (separate from the enter/exit timeline
+    //    above, so it keeps tracking scroll even mid-section).
+    if (heading) {
+      var endColor = getComputedStyle(root).getPropertyValue('--rt-color-end').trim();
+      gsap.to(heading, {
+        color: endColor,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: root,
+          start: 'top 70%',
+          end: 'bottom 30%',
+          scrub: 0.6
+        }
+      });
     }
   }
 
   function initAll() {
-    document.querySelectorAll('[data-liquid-rt]').forEach(initSection);
+    document.querySelectorAll('.nv-richtext.rt-js').forEach(initSection);
   }
 
   ensureGsap().then(initAll).catch(function (err) {
-    console.warn('Liquid rich text: GSAP failed to load, showing static content.', err);
-    document.querySelectorAll('[data-liquid-rt]').forEach(function (root) {
-      root.querySelectorAll('.liquid-rt__word-inner, [data-rt-eyebrow], [data-rt-button]').forEach(function (el) {
-        el.style.opacity = '1';
-        el.style.transform = 'none';
-      });
-      var body = root.querySelector('[data-rt-body]');
-      if (body) {
-        Array.prototype.forEach.call(body.children, function (el) {
-          el.style.opacity = '1';
-          el.style.transform = 'none';
-        });
-      }
+    console.warn('Rich text animation: GSAP failed to load, showing static content.', err);
+    document.querySelectorAll('.nv-richtext.rt-js').forEach(function (root) {
+      root.classList.remove('rt-js');
     });
   });
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () {}, { once: true });
-  }
-
   document.addEventListener('shopify:section:load', function (evt) {
-    var root = evt.target.querySelector('[data-liquid-rt]');
+    var root = evt.target.querySelector('.nv-richtext.rt-js');
     if (root) ensureGsap().then(function () { initSection(root); });
   });
 })();
 </script>
+{% endif %}
 
 {% schema %}
 {
-  "name": "Liquid rich text",
+  "name": "Rich text",
   "tag": "section",
-  "class": "shopify-section--liquid-richtext",
+  "class": "nv-richtext-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
   "settings": [
     {
-      "type": "text",
-      "id": "eyebrow_text",
-      "label": "Eyebrow text",
-      "default": "Field Notes"
+      "type": "header",
+      "content": "General"
     },
     {
-      "type": "text",
-      "id": "heading",
-      "label": "Heading",
-      "default": "Ink finds its own way down the page"
+      "type": "color_scheme",
+      "id": "color_schemes",
+      "label": "Color scheme",
+      "default": "scheme-1"
     },
     {
-      "type": "richtext",
-      "id": "body",
-      "label": "Body",
-      "default": "<p>Write the paragraph that anchors this section. Each block of copy rises into place as it scrolls into view, the way ink settles once it stops spreading through water.</p>"
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_animation",
+      "label": "Enable scroll animation",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "animation_start_color",
+      "label": "Heading color \u2014 start",
+      "default": "#1D1D1D"
+    },
+    {
+      "type": "color",
+      "id": "animation_end_color",
+      "label": "Heading color \u2014 end",
+      "default": "#8B5CF6"
+    },
+    {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding top",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 60
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding bottom",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 60
+      },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
     },
     {
       "type": "select",
       "id": "content_alignment",
       "label": "Content alignment",
+      "default": "center",
       "options": [
-        { "value": "left", "label": "Left" },
-        { "value": "center", "label": "Center" }
-      ],
-      "default": "left"
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
     },
     {
-      "type": "checkbox",
-      "id": "show_button",
-      "label": "Show button",
-      "default": false
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Subheading"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Talk about your brand"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "Large" },
+            { "value": "h2", "label": "Medium" },
+            { "value": "h3", "label": "Small" }
+          ]
+        }
+      ]
     },
     {
       "type": "text",
-      "id": "button_label",
-      "label": "Button label",
-      "default": "Read more"
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+        }
+      ]
     },
     {
-      "type": "url",
-      "id": "button_link",
-      "label": "Button link"
-    },
-    {
-      "type": "color",
-      "id": "accent_color",
-      "label": "Accent color",
-      "default": "#5FE1C9"
-    },
-    {
-      "type": "color",
-      "id": "accent_color_2",
-      "label": "Accent color 2",
-      "default": "#8C7BFF"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "label": "Top padding",
-      "min": 0,
-      "max": 160,
-      "step": 4,
-      "unit": "px",
-      "default": 96
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "label": "Bottom padding",
-      "min": 0,
-      "max": 160,
-      "step": 4,
-      "unit": "px",
-      "default": 96
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
     }
   ],
   "presets": [
     {
-      "name": "rich text"
+      "name": "Rich text",
+      "blocks": [
+        { "type": "subheading" },
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "button" }
+      ]
     }
   ]
 }
