@@ -51,21 +51,10 @@
         "stat4_number": "$2B+",
         "stat4_label": "Property Transactions"
       }
-    },
-    "hero_g_wMezgi": {
-      "type": "heroG",
-      "name": "Hero GSAP",
-      "settings": {
-        "heading": "Welcome to Our Store",
-        "text": "Build beautiful Shopify stores with GSAP animations.",
-        "button_label": "Shop Now",
-        "button_link": "shopify://blogs/news"
-      }
     }
   },
   "order": [
     "newsletter_p8JdYA",
-    "2_4_image_card_74P7Nx",
-    "hero_g_wMezgi"
+    "2_4_image_card_74P7Nx"
   ]
 }
