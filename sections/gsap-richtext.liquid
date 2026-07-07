@@ -1,0 +1,580 @@
+{% liquid 
+  # Padding: use one desktop value and scale it for laptop, tablet, and mobile
+  assign padding_top = section.settings.padding_top | default: 0
+  assign laptop_padding_top = padding_top | times: 80 | divided_by: 100
+  assign tab_padding_top = laptop_padding_top | times: 80 | divided_by: 100
+  assign mobile_padding_top = tab_padding_top | times: 50 | divided_by: 100
+
+  assign padding_bottom = section.settings.padding_bottom | default: 0
+  assign laptop_padding_bottom = padding_bottom | times: 80 | divided_by: 100
+  assign tab_padding_bottom = laptop_padding_bottom | times: 80 | divided_by: 100
+  assign mobile_padding_bottom = tab_padding_bottom | times: 50 | divided_by: 100
+
+  # margin: use one desktop value and scale it for laptop, tablet, and mobile
+  assign margin_top = section.settings.margin_top | default: 0
+  assign laptop_margin_top = margin_top | times: 80 | divided_by: 100
+  assign tab_margin_top = laptop_margin_top | times: 80 | divided_by: 100
+  assign mobile_margin_top = tab_margin_top | times: 50 | divided_by: 100
+
+  assign margin_bottom = section.settings.margin_bottom | default: 0
+  assign laptop_margin_bottom = margin_bottom | times: 80 | divided_by: 100
+  assign tab_margin_bottom = laptop_margin_bottom | times: 80 | divided_by: 100
+  assign mobile_margin_bottom = tab_margin_bottom | times: 50 | divided_by: 100
+%}
+
+<div
+  class="shopify-section-{{ section.id }} nv-richtext nv-richtext-{{ section.id }} color-{{ section.settings.color_schemes }}"
+  id="nv-richtext-{{ section.id }}"
+  style="--rt-color-start: {{ section.settings.animation_start_color }}; --rt-color-end: {{ section.settings.animation_end_color }};"
+>
+  {%- if section.settings.enable_scroll_animation -%}
+    <script>
+      (function () {
+        var el = document.getElementById('nv-richtext-{{ section.id }}');
+        if (el) el.classList.add('rt-js');
+      })();
+    </script>
+  {%- endif -%}
+
+  <div class="container">
+    <div class="nv-richtext__wrapper" style="text-align: {{ section.settings.content_alignment }};">
+
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when '@app' %}
+            <div class="nv-richtext__app" {{ block.shopify_attributes }}>
+              {% render block %}
+            </div>
+
+          {% when 'subheading' %}
+            {% if block.settings.subheading != blank %}
+              {% assign rt_sub_chars = block.settings.subheading | split: '' %}
+              <div class="nv-richtext__subheading rt-anim-subheading" data-rt-block="subheading" {{ block.shopify_attributes }}>
+                {% for ch in rt_sub_chars %}{% if ch == ' ' %} {% else %}<span class="rt-char">{{ ch }}</span>{% endif %}{% endfor %}
+              </div>
+            {% endif %}
+
+          {% when 'heading' %}
+            {% if block.settings.heading != blank %}
+              {% assign rt_heading_words = block.settings.heading | split: ' ' %}
+              {% if block.settings.heading_size == 'h1' %}
+                <h1 class="nv-richtext__heading nv-richtext__heading--h1 rt-anim-heading" data-rt-block="heading" {{ block.shopify_attributes }}>
+                  {% for word in rt_heading_words %}<span class="rt-word">{{ word }}</span>{% unless forloop.last %}<span class="rt-word-space">&nbsp;</span>{% endunless %}{% endfor %}
+                </h1>
+              {% elsif block.settings.heading_size == 'h3' %}
+                <h3 class="nv-richtext__heading nv-richtext__heading--h3 rt-anim-heading" data-rt-block="heading" {{ block.shopify_attributes }}>
+                  {% for word in rt_heading_words %}<span class="rt-word">{{ word }}</span>{% unless forloop.last %}<span class="rt-word-space">&nbsp;</span>{% endunless %}{% endfor %}
+                </h3>
+              {% else %}
+                <h2 class="nv-richtext__heading nv-richtext__heading--h2 rt-anim-heading" data-rt-block="heading" {{ block.shopify_attributes }}>
+                  {% for word in rt_heading_words %}<span class="rt-word">{{ word }}</span>{% unless forloop.last %}<span class="rt-word-space">&nbsp;</span>{% endunless %}{% endfor %}
+                </h2>
+              {% endif %}
+            {% endif %}
+
+          {% when 'text' %}
+            {% if block.settings.text != blank %}
+              <div class="nv-richtext__text rte rt-anim-text" data-rt-block="text" {{ block.shopify_attributes }}>
+                {{ block.settings.text }}
+              </div>
+            {% endif %}
+
+          {% when 'button' %}
+            {% if block.settings.button_label != blank %}
+              <a
+                href="{{ block.settings.button_link }}"
+                class="nv-richtext__button nv-btn-bg nv-btn-animation rt-anim-fade"
+                data-rt-block="button"
+                {{ block.shopify_attributes }}
+              >
+                {{ block.settings.button_label }}
+              </a>
+            {% endif %}
+
+        {% endcase %}
+      {% endfor %}
+
+    </div>
+  </div>
+</div>
+
+{% style %}
+ /* Mobile: base spacing and single-column grid */
+  .shopify-section-{{ section.id }} {
+    padding-top: {{ mobile_padding_top }}px;
+    padding-bottom: {{ mobile_padding_bottom }}px;
+    margin-top: {{ mobile_margin_top }}px;
+    margin-bottom: {{ mobile_margin_bottom }}px;
+  }
+
+  .shopify-section-{{ section.id }}
+  .container {
+    margin-top: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    /* Tablet: use tablet padding and column setting */
+    .shopify-section-{{ section.id }} {
+      padding-top: {{ tab_padding_top }}px;
+      padding-bottom: {{ tab_padding_bottom }}px;
+      margin-top: {{ tab_margin_top }}px;
+      margin-bottom: {{ tab_margin_bottom }}px;
+    }
+
+    .shopify-section-{{ section.id }}
+    .container {
+      margin-top: 2rem;
+    }
+  }
+
+  @media (min-width: 992px) {
+    /* Laptop: laptop padding and columns */
+    .shopify-section-{{ section.id }} {
+      padding-top: {{ laptop_padding_top }}px;
+      padding-bottom: {{ laptop_padding_bottom }}px;
+      margin-top: {{ laptop_margin_top }}px;
+      margin-bottom: {{ laptop_margin_bottom }}px;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    /* Desktop: full padding and desktop columns */
+    .shopify-section-{{ section.id }} {
+      padding-top: {{ padding_top }}px;
+      padding-bottom: {{ padding_bottom }}px;
+      margin-top: {{ margin_top }}px;
+      margin-bottom: {{ margin_bottom }}px;
+    }
+  }
+{% endstyle %}
+
+{% stylesheet %}
+
+  .nv-richtext__wrapper {
+    margin: 0 auto;
+  }
+
+  .nv-richtext__subheading {
+    margin-bottom: 12px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+  }
+
+  .nv-richtext__heading {
+    margin: 0 0 20px;
+    line-height: 1.15;
+    font-weight: 600;
+  }
+
+  .nv-richtext__heading--h1 { font-size: 48px; }
+  .nv-richtext__heading--h2 { font-size: 38px; }
+  .nv-richtext__heading--h3 { font-size: 30px; }
+
+  .nv-richtext__text {
+   font-size: 18px;
+  }
+
+  .nv-richtext__text p:last-child {
+    margin-bottom: 0;
+  }
+
+  .nv-richtext__button {
+    display: block;
+    width: fit-content;
+    margin: 28px auto 0;
+  }
+
+  @media screen and (max-width: 749px) {
+    .nv-richtext__heading--h1 { font-size: 34px; }
+    .nv-richtext__heading--h2 { font-size: 28px; }
+    .nv-richtext__heading--h3 { font-size: 24px; }
+
+    .nv-richtext__text {
+      font-size: 16px;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     GSAP text animation — hidden-until-JS states.
+     The .rt-js class is added synchronously the moment this section's
+     markup is parsed, so there is no flash of visible-then-hidden content.
+     If JavaScript is disabled, .rt-js never gets added and everything just
+     renders normally (no broken/invisible content).
+  --------------------------------------------------------------------- */
+
+  .rt-js .nv-richtext__heading.rt-anim-heading {
+    color: var(--rt-color-start);
+  }
+
+  /* Subheading: letters type on, one by one, dropping in from above */
+  .rt-js .rt-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-16px);
+    will-change: transform, opacity;
+  }
+
+  /* Heading: whole words fly in diagonally from the top right */
+  .rt-js .rt-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translate(34px, -46px) rotate(6deg);
+    filter: blur(5px);
+    will-change: transform, opacity, filter;
+  }
+  .rt-word-space {
+    display: inline-block;
+    width: 0.3em;
+  }
+
+  /* Body text: each paragraph/element slides in from the left */
+  .rt-js .nv-richtext__text.rt-anim-text > * {
+    opacity: 0;
+    transform: translateX(-48px);
+    will-change: transform, opacity;
+  }
+
+  /* Button: comes up from below last, landing with a bounce */
+  .rt-js .rt-anim-fade {
+    opacity: 0;
+    transform: translateY(36px) scale(0.9);
+    will-change: transform, opacity;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .rt-js .nv-richtext__heading.rt-anim-heading { color: inherit; }
+    .rt-js .rt-char { opacity: 1; transform: none; }
+    .rt-js .rt-word { opacity: 1; transform: none; filter: none; }
+    .rt-js .rt-anim-fade { opacity: 1; transform: none; }
+    .rt-js .nv-richtext__text.rt-anim-text > * { opacity: 1; transform: none; }
+  }
+
+{% endstylesheet %}
+
+{% if section.settings.enable_scroll_animation %}
+<script>
+(() => {
+  const CDN = {
+    gsap: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js',
+    st: 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js'
+  };
+
+  const loadScript = (src) => new Promise((resolve, reject) => {
+    const existing = document.querySelector(`script[data-rt-src="${src}"]`);
+    if (existing) {
+      if (window.gsap && (src !== CDN.st || window.ScrollTrigger)) return resolve();
+      existing.addEventListener('load', resolve);
+      existing.addEventListener('error', reject);
+      return;
+    }
+    const s = document.createElement('script');
+    s.src = src;
+    s.async = true;
+    s.setAttribute('data-rt-src', src);
+    s.onload = resolve;
+    s.onerror = reject;
+    document.head.appendChild(s);
+  });
+
+  const ensureGsap = () => {
+    if (window.gsap && window.ScrollTrigger) return Promise.resolve();
+    return loadScript(CDN.gsap)
+      .then(() => loadScript(CDN.st))
+      .then(() => gsap.registerPlugin(ScrollTrigger));
+  };
+
+  const initSection = (root) => {
+    if (!root || root.dataset.rtInitialized) return;
+    root.dataset.rtInitialized = 'true';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const heading = root.querySelector('.rt-anim-heading');
+    const letters = root.querySelectorAll('.rt-char');
+    const words = root.querySelectorAll('.rt-word');
+    const textChildren = root.querySelectorAll('.rt-anim-text > *');
+    const button = root.querySelector('[data-rt-block="button"]');
+
+    // Block-wise reveal, one block after another, each with its own entrance
+    // direction. toggleActions plays it on the way in and REVERSES it on the
+    // way out, so text comes in and goes back out as you scroll past it.
+    // ScrollTrigger evaluates the trigger's position the moment it's created,
+    // so a section that's already in view on page load (e.g. near the top
+    // of the page) plays immediately — no scrolling required to see it.
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: root,
+        start: 'top 82%',
+        end: 'bottom 18%',
+        toggleActions: 'play reverse play reverse'
+      }
+    });
+
+    // 1) Subheading — letters type on one by one, dropping from above.
+    if (letters.length) {
+      tl.to(letters, {
+        opacity: 1,
+        y: 0,
+        duration: 0.4,
+        ease: 'power2.out',
+        stagger: 0.025
+      }, 0);
+    }
+
+    // 2) Heading — whole words fly in diagonally from the top right.
+    if (words.length) {
+      tl.to(words, {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        rotate: 0,
+        filter: 'blur(0px)',
+        duration: 0.8,
+        ease: 'power3.out',
+        stagger: 0.06
+      }, 0.25);
+    }
+
+    // 3) Body text — each paragraph slides in from the left.
+    if (textChildren.length) {
+      tl.to(textChildren, {
+        opacity: 1,
+        x: 0,
+        duration: 0.65,
+        ease: 'power3.out',
+        stagger: 0.12
+      }, 0.55);
+    }
+
+    // 4) Button — comes last, rising up from below and landing with a bounce.
+    if (button) {
+      tl.to(button, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.7,
+        ease: 'bounce.out'
+      }, '>-0.1');
+    }
+
+    // Heading color shift, scrubbed to scroll position as the section moves
+    // through the viewport (separate from the timeline above, so it keeps
+    // tracking scroll continuously rather than firing once).
+    if (heading) {
+      const endColor = getComputedStyle(root).getPropertyValue('--rt-color-end').trim();
+      gsap.to(heading, {
+        color: endColor,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: root,
+          start: 'top 70%',
+          end: 'bottom 30%',
+          scrub: 0.6
+        }
+      });
+    }
+  };
+
+  const initAll = () => {
+    document.querySelectorAll('.nv-richtext.rt-js').forEach(initSection);
+    // Positions can shift slightly once fonts/images finish loading, so
+    // double-check after full load that already-visible sections played.
+    window.addEventListener('load', () => ScrollTrigger.refresh(), { once: true });
+  };
+
+  ensureGsap().then(initAll).catch((err) => {
+    console.warn('Rich text animation: GSAP failed to load, showing static content.', err);
+    document.querySelectorAll('.nv-richtext.rt-js').forEach((root) => {
+      root.classList.remove('rt-js');
+    });
+  });
+
+  document.addEventListener('shopify:section:load', (evt) => {
+    const root = evt.target.querySelector('.nv-richtext.rt-js');
+    if (root) ensureGsap().then(() => initSection(root));
+  });
+})();
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Rich text",
+  "tag": "section",
+  "class": "nv-richtext-section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+    {
+      "type": "header",
+      "content": "General"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_schemes",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_scroll_animation",
+      "label": "Enable scroll animation",
+      "default": true
+    },
+    {
+      "type": "color",
+      "id": "animation_start_color",
+      "label": "Heading color \u2014 start",
+      "default": "#1D1D1D"
+    },
+    {
+      "type": "color",
+      "id": "animation_end_color",
+      "label": "Heading color \u2014 end",
+      "default": "#8B5CF6"
+    },
+    {
+        "type": "range",
+        "id": "padding_top",
+        "label": "Padding top",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 60
+      },
+      {
+        "type": "range",
+        "id": "padding_bottom",
+        "label": "Padding bottom",
+        "min": 0,
+        "max": 120,
+        "step": 4,
+        "unit": "px",
+        "default": 60
+      },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "label": "Margin top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "label": "Margin bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "default": "center",
+      "options": [
+        { "value": "left",   "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "right",  "label": "Right" }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "subheading",
+      "name": "Subheading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "subheading",
+          "label": "Subheading",
+          "default": "Subheading"
+        }
+      ]
+    },
+    {
+      "type": "heading",
+      "name": "Heading",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Talk about your brand"
+        },
+        {
+          "type": "select",
+          "id": "heading_size",
+          "label": "Heading size",
+          "default": "h2",
+          "options": [
+            { "value": "h1", "label": "Large" },
+            { "value": "h2", "label": "Medium" },
+            { "value": "h3", "label": "Small" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Text",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+        }
+      ]
+    },
+    {
+      "type": "button",
+      "name": "Button",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label",
+          "default": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Rich text - GSAP",
+      "blocks": [
+        { "type": "subheading" },
+        { "type": "heading" },
+        { "type": "text" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}
