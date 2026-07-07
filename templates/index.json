@@ -52,55 +52,6 @@
         "stat4_label": "Property Transactions"
       }
     },
-    "hero_g_wQJpKG": {
-      "type": "heroG",
-      "blocks": {
-        "subheading_aURrWY": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Subheading"
-          }
-        },
-        "heading_aHN9BL": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk   about your brand",
-            "heading_size": "h2"
-          }
-        },
-        "text_T7azBY": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
-          }
-        },
-        "button_EYB3Qj": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "subheading_aURrWY",
-        "heading_aHN9BL",
-        "text_T7azBY",
-        "button_EYB3Qj"
-      ],
-      "name": "Rich text",
-      "settings": {
-        "color_schemes": "",
-        "enable_scroll_animation": true,
-        "animation_start_color": "#1D1D1D",
-        "animation_end_color": "#8B5CF6",
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "content_alignment": "center"
-      }
-    },
     "image_comparison_Uyq4bW": {
       "type": "image-comparison",
       "blocks": {
@@ -221,13 +172,62 @@
         "custom_class": "",
         "animations": "inherit"
       }
+    },
+    "gsap_richtext_WCyfcL": {
+      "type": "gsap-richtext",
+      "blocks": {
+        "subheading_t9TnK9": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Subheading"
+          }
+        },
+        "heading_Aaehp4": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h2"
+          }
+        },
+        "text_NqmiUx": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_WyPxHP": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_t9TnK9",
+        "heading_Aaehp4",
+        "text_NqmiUx",
+        "button_WyPxHP"
+      ],
+      "name": "Rich text - GSAP",
+      "settings": {
+        "color_schemes": "",
+        "enable_scroll_animation": true,
+        "animation_start_color": "#1D1D1D",
+        "animation_end_color": "#8B5CF6",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "content_alignment": "center"
+      }
     }
   },
   "order": [
     "newsletter_p8JdYA",
     "2_4_image_card_74P7Nx",
-    "hero_g_wQJpKG",
     "image_comparison_Uyq4bW",
+    "gsap_richtext_WCyfcL",
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX"
   ]
