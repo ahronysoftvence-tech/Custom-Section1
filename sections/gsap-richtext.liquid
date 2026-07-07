@@ -30,7 +30,7 @@
   {%- if section.settings.enable_scroll_animation -%}
     <script>
       (function () {
-        var el = document.getElementById('nv-richtext-{{ section.id }}');
+        let el = document.getElementById('nv-richtext-{{ section.id }}');
         if (el) el.classList.add('rt-js');
       })();
     </script>
