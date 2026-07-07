@@ -51,10 +51,97 @@
         "stat4_number": "$2B+",
         "stat4_label": "Property Transactions"
       }
+    },
+    "hero_g_wQJpKG": {
+      "type": "heroG",
+      "blocks": {
+        "subheading_aURrWY": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Subheading"
+          }
+        },
+        "heading_aHN9BL": {
+          "type": "heading",
+          "settings": {
+            "heading": "Talk about your brand",
+            "heading_size": "h2"
+          }
+        },
+        "text_T7azBY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
+          }
+        },
+        "button_EYB3Qj": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "subheading_aURrWY",
+        "heading_aHN9BL",
+        "text_T7azBY",
+        "button_EYB3Qj"
+      ],
+      "name": "Rich text",
+      "settings": {
+        "color_schemes": "",
+        "enable_scroll_animation": true,
+        "animation_start_color": "#1D1D1D",
+        "animation_end_color": "#8B5CF6",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "margin_top": 0,
+        "margin_bottom": 0,
+        "content_alignment": "center"
+      }
+    },
+    "image_comparison_Uyq4bW": {
+      "type": "image-comparison",
+      "blocks": {
+        "image_nKJLpE": {
+          "type": "image",
+          "settings": {
+            "heading": "Before"
+          }
+        },
+        "image_DYMFhf": {
+          "type": "image",
+          "settings": {
+            "heading": "After"
+          }
+        }
+      },
+      "block_order": [
+        "image_nKJLpE",
+        "image_DYMFhf"
+      ],
+      "name": "Before/after image slider",
+      "settings": {
+        "container": "container-fluid",
+        "color_scheme": "",
+        "heading": "Before/after image slider",
+        "heading_size": "h3",
+        "subheading": "",
+        "description": "",
+        "header_alignment": "center",
+        "layout": "horizontal",
+        "image_height": "adapt",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "custom_class": ""
+      }
     }
   },
   "order": [
     "newsletter_p8JdYA",
-    "2_4_image_card_74P7Nx"
+    "2_4_image_card_74P7Nx",
+    "hero_g_wQJpKG",
+    "image_comparison_Uyq4bW"
   ]
 }
