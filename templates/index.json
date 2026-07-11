@@ -88,55 +88,6 @@
         "custom_class": ""
       }
     },
-    "gsap_richtext_WCyfcL": {
-      "type": "gsap-richtext",
-      "blocks": {
-        "subheading_t9TnK9": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Subheading"
-          }
-        },
-        "heading_Aaehp4": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h2"
-          }
-        },
-        "text_NqmiUx": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.</p>"
-          }
-        },
-        "button_WyPxHP": {
-          "type": "button",
-          "settings": {
-            "button_label": "Button label",
-            "button_link": ""
-          }
-        }
-      },
-      "block_order": [
-        "subheading_t9TnK9",
-        "heading_Aaehp4",
-        "text_NqmiUx",
-        "button_WyPxHP"
-      ],
-      "name": "Rich text - GSAP",
-      "settings": {
-        "color_schemes": "",
-        "enable_scroll_animation": true,
-        "animation_start_color": "#e9844e",
-        "animation_end_color": "#1eedf4",
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "margin_top": 0,
-        "margin_bottom": 0,
-        "content_alignment": "center"
-      }
-    },
     "collapsible_tabs_aiKiky": {
       "type": "collapsible-tabs",
       "blocks": {
@@ -260,7 +211,7 @@
       ],
       "name": "Rich text - GSAP",
       "settings": {
-        "color_schemes": "",
+        "color_schemes": "badge-sale",
         "enable_scroll_animation": true,
         "animation_start_color": "#1D1D1D",
         "animation_end_color": "#73FF00",
@@ -276,7 +227,6 @@
     "newsletter_p8JdYA",
     "2_4_image_card_74P7Nx",
     "image_comparison_Uyq4bW",
-    "gsap_richtext_WCyfcL",
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX",
     "gsap_richtext_XAqnLj"
