@@ -441,20 +441,19 @@
     }
 
     /* ---------- Custom floating cursor ---------- */
-    if (cursorEnabled && cursor) {
+    {% comment %} if (cursorEnabled && cursor) {
       const titlesWrap = section.querySelector('[data-ifp-titles]');
       const previewWrap = section.querySelector('[data-ifp-preview]');
-      {% comment %} let mouseX = 0;
+      let mouseX = 0;
       let mouseY = 0;
       let curX = 0;
       let curY = 0;
-      let raf = null; {% endcomment %}
+      let raf = null;
       let visible = false;
 
-      {% comment %} function loop() {
+      function loop() {
         curX += (mouseX - curX) * 0.18;
-        curY += (mouseY - curY) * 0.18; 
-     }
+        curY += (mouseY - curY) * 0.18;
         cursor.style.transform = 'translate3d(' + curX + 'px,' + curY + 'px,0) translate(-50%, -50%)';
         raf = requestAnimationFrame(loop);
       }
@@ -465,30 +464,18 @@
           cursor.classList.add('is-visible');
           if (!raf) loop();
         }
-      } {% endcomment %}
-
-      function show() {
-  if (!visible) {
-    visible = true;
-    cursor.classList.add('is-visible');
-  }
-}
+      }
 
       function hide() {
         visible = false;
         cursor.classList.remove('is-visible');
       }
 
-      {% comment %} function trackMouse(e) {
+      function trackMouse(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
         show();
-      } {% endcomment %}
-
-      function trackMouse(e) {
-  cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-  show();
-}
+      }
 
       if (titlesWrap) {
         titlesWrap.addEventListener('mousemove', trackMouse);
@@ -499,7 +486,43 @@
         previewWrap.addEventListener('mousemove', trackMouse);
         previewWrap.addEventListener('mouseleave', hide);
       }
+    } {% endcomment %}
+
+
+
+    if (cursorEnabled && cursor) {
+  const titlesWrap = section.querySelector('[data-ifp-titles]');
+  const previewWrap = section.querySelector('[data-ifp-preview]');
+  let visible = false;
+
+  function show() {
+    if (!visible) {
+      visible = true;
+      cursor.classList.add('is-visible');
     }
+  }
+
+  function hide() {
+    visible = false;
+    cursor.classList.remove('is-visible');
+  }
+
+  function trackMouse(e) {
+    cursor.style.transform =
+      `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    show();
+  }
+
+  if (titlesWrap) {
+    titlesWrap.addEventListener('mousemove', trackMouse);
+    titlesWrap.addEventListener('mouseleave', hide);
+  }
+
+  if (previewWrap) {
+    previewWrap.addEventListener('mousemove', trackMouse);
+    previewWrap.addEventListener('mouseleave', hide);
+  }
+}
 
     /* ---------- Right-side hover sync ---------- */
     /* Hovering the visible preview image highlights its matching title,
