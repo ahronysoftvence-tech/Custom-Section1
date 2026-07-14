@@ -444,21 +444,17 @@
     if (cursorEnabled && cursor) {
       const titlesWrap = section.querySelector('[data-ifp-titles]');
       const previewWrap = section.querySelector('[data-ifp-preview]');
-      let mouseX = 0;
+      {% comment %} let mouseX = 0;
       let mouseY = 0;
-      {% comment %} let curX = 0;
-      let curY = 0; {% endcomment %}
-      let raf = null;
+      let curX = 0;
+      let curY = 0;
+      let raf = null; {% endcomment %}
       let visible = false;
 
       {% comment %} function loop() {
         curX += (mouseX - curX) * 0.18;
-        curY += (mouseY - curY) * 0.18; {% endcomment %}
-        function trackMouse(e) {
-  cursor.style.transform =
-    `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-  show();
-}
+        curY += (mouseY - curY) * 0.18; 
+     }
         cursor.style.transform = 'translate3d(' + curX + 'px,' + curY + 'px,0) translate(-50%, -50%)';
         raf = requestAnimationFrame(loop);
       }
@@ -469,18 +465,30 @@
           cursor.classList.add('is-visible');
           if (!raf) loop();
         }
-      }
+      } {% endcomment %}
+
+      function show() {
+  if (!visible) {
+    visible = true;
+    cursor.classList.add('is-visible');
+  }
+}
 
       function hide() {
         visible = false;
         cursor.classList.remove('is-visible');
       }
 
-      function trackMouse(e) {
+      {% comment %} function trackMouse(e) {
         mouseX = e.clientX;
         mouseY = e.clientY;
         show();
-      }
+      } {% endcomment %}
+
+      function trackMouse(e) {
+  cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+  show();
+}
 
       if (titlesWrap) {
         titlesWrap.addEventListener('mousemove', trackMouse);
