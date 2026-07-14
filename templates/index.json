@@ -251,7 +251,46 @@
             "active_color": ""
           }
         },
+        "product_wMtAQF": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "image": "shopify://shop_images/4187793.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
         "product_DhkA9A": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "image": "shopify://shop_images/Untitled_design_1.png",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_jfB9ka": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "image": "shopify://shop_images/Untitled_design_1.png",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_xfC7RA": {
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
@@ -277,7 +316,46 @@
             "active_color": ""
           }
         },
+        "product_rLDqUb": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "image": "shopify://shop_images/tropical_granite_podium_geometric_plants_decoration_black_background.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_fQB6n6": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "image": "shopify://shop_images/tropical_granite_podium_geometric_plants_decoration_black_background.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
         "product_gpdqHJ": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "image": "shopify://shop_images/image-3.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_qzyeMa": {
           "type": "product",
           "settings": {
             "title": "Dancing Cupboard",
@@ -316,7 +394,33 @@
             "active_color": ""
           }
         },
+        "product_B4Xf4J": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "image": "shopify://shop_images/stage-design-with-christmas-concept-element.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
         "product_47VEhE": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "image": "shopify://shop_images/4187793.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_V8EPpj": {
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
@@ -333,12 +437,20 @@
       "block_order": [
         "product_PnjVpa",
         "product_Li7YE9",
+        "product_wMtAQF",
         "product_DhkA9A",
+        "product_jfB9ka",
+        "product_xfC7RA",
         "product_jiNU9T",
+        "product_rLDqUb",
+        "product_fQB6n6",
         "product_gpdqHJ",
+        "product_qzyeMa",
         "product_LDqBgY",
         "product_cgQdcU",
-        "product_47VEhE"
+        "product_B4Xf4J",
+        "product_47VEhE",
+        "product_V8EPpj"
       ],
       "name": "Interactive Products",
       "settings": {
