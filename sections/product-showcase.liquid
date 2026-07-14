@@ -92,7 +92,7 @@
     height: 100%;
   }
 
-  /* .ifp-preview-sticky {
+  .ifp-preview-sticky {
     position: sticky;
     top: 0;
     height: 100%;
@@ -100,20 +100,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  } */
-
-
-  .ifp-preview-sticky {
-  position: sticky;
-  top: 50%;
-  transform: translateY(-50%);
-  height: 100%;
-  max-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  will-change: transform;
-}
+  }
 
   .ifp-image-stage {
     position: relative;
@@ -509,35 +496,6 @@
         });
       });
     }
-
-
-    /* ---------- Image vertical movement ---------- */
-
-const sticky = section.querySelector(".ifp-preview-sticky");
-
-function updateStickyPosition() {
-  if (!sticky) return;
-
-  const rect = section.getBoundingClientRect();
-  const viewport = window.innerHeight;
-
-  // 0 → 1 while section scrolls
-  let progress = (viewport - rect.top) / (viewport + rect.height);
-  progress = Math.max(0, Math.min(1, progress));
-
-  // Start centered and move upward
-  const move = progress * (viewport * 0.3);
-
-  sticky.style.transform = `translateY(${-move}px)`;
-}
-
-updateStickyPosition();
-
-window.addEventListener("scroll", updateStickyPosition);
-window.addEventListener("resize", updateStickyPosition);
-
-
-
 
     /* Prefers reduced motion: disable fancy easing */
     if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
