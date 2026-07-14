@@ -39,21 +39,16 @@
   }
 
   .ifp-title-row {
+    position: relative;
     display: flex;
     flex-direction: column;
     padding: 22px 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.08);
     text-decoration: none;
     cursor: pointer;
     background: none;
-    border-left: none;
-    border-right: none;
+    border: none;
     text-align: left;
     width: 100%;
-  }
-
-  .ifp-titles .ifp-title-row:last-child {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   }
 
   .ifp-title-meta {
@@ -100,9 +95,15 @@
 
   .ifp-preview-sticky {
     position: sticky;
-    top: 10vh;
+    top: 0;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ifp-image-stage {
     max-height: 80vh;
-    align-self: start;
   }
 
   .ifp-image-stage {
@@ -121,6 +122,8 @@
       opacity var(--ifp-image-duration, 0.6s) ease,
       transform var(--ifp-image-duration, 0.6s) ease;
     pointer-events: none;
+    text-decoration: none;
+    display: block;
   }
 
   .ifp-image-wrap.is-active {
@@ -272,7 +275,7 @@
     --ifp-pad-mobile: {{ settings.padding_mobile | default: 40 }}px;
   "
 >
-  <div class="ifp-inner">
+  <div class="ifp-inner container">
 
     {%- if settings.heading != blank -%}
       <div class="ifp-header">
@@ -324,11 +327,20 @@
           <div class="ifp-image-stage" data-ifp-image-stage style="--ifp-ratio: {% case settings.image_ratio %}{% when 'square' or '1:1' %}1/1{% when 'portrait' %}4/5{% when 'landscape' %}16/9{% when '4:5' %}4/5{% when '3:4' %}3/4{% when '16:9' %}16/9{% else %}auto{% endcase %};">
             {%- for block in blocks -%}
               {%- if block.settings.enable_block -%}
-                {%- assign img = block.settings.image -%}
-                <div
+                {%- liquid
+                  assign img = block.settings.image
+                  assign img_product_url = block.settings.product_url
+                  assign img_tag = 'div'
+                  if img_product_url != blank
+                    assign img_tag = 'a'
+                  endif
+                -%}
+                <{{ img_tag }}
+                  {% if img_tag == 'a' %}href="{{ img_product_url }}"{% endif %}
                   class="ifp-image-wrap{% if forloop.first %} is-active{% endif %}"
                   id="ifp-img-{{ section_id }}-{{ forloop.index0 }}"
                   data-ifp-image
+                  data-index="{{ forloop.index0 }}"
                 >
                   {%- if img != blank -%}
                     <img
@@ -347,7 +359,7 @@
                       {{ 'lifestyle-1' | placeholder_svg_tag }}
                     </div>
                   {%- endif -%}
-                </div>
+                </{{ img_tag }}>
               {%- endif -%}
             {%- endfor -%}
           </div>
@@ -436,6 +448,7 @@
     /* ---------- Custom floating cursor ---------- */
     if (cursorEnabled && cursor) {
       var titlesWrap = section.querySelector('[data-ifp-titles]');
+      var previewWrap = section.querySelector('[data-ifp-preview]');
       var mouseX = 0, mouseY = 0, curX = 0, curY = 0, raf = null;
       var visible = false;
 
@@ -459,14 +472,32 @@
         cursor.classList.remove('is-visible');
       }
 
+      function trackMouse(e) {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        show();
+      }
+
       if (titlesWrap) {
-        titlesWrap.addEventListener('mousemove', function (e) {
-          mouseX = e.clientX;
-          mouseY = e.clientY;
-          show();
-        });
+        titlesWrap.addEventListener('mousemove', trackMouse);
         titlesWrap.addEventListener('mouseleave', hide);
       }
+
+      if (previewWrap) {
+        previewWrap.addEventListener('mousemove', trackMouse);
+        previewWrap.addEventListener('mouseleave', hide);
+      }
+    }
+
+    /* ---------- Right-side hover sync ---------- */
+    /* Hovering the visible preview image highlights its matching title,
+       so both the title list and the image stay in sync either direction. */
+    if (hoverEnabled) {
+      images.forEach(function (imgEl, i) {
+        imgEl.addEventListener('mouseenter', function () {
+          setActive(i);
+        });
+      });
     }
 
     /* Prefers reduced motion: disable fancy easing */
@@ -579,6 +610,18 @@
       "name": "Interactive Products",
       "blocks": [
         { "type": "product", "settings": { "title": "Dining Windsor" } },
+        { "type": "product", "settings": { "title": "Luneta Stool" } },
+        { "type": "product", "settings": { "title": "99 Bedside Table" } },
+        { "type": "product", "settings": { "title": "Dancing Bedside" } },
+        
+        { "type": "product", "settings": { "title": "Luneta Stool" } },
+        { "type": "product", "settings": { "title": "99 Bedside Table" } },
+        { "type": "product", "settings": { "title": "Dancing Bedside" } },
+        
+        { "type": "product", "settings": { "title": "Luneta Stool" } },
+        { "type": "product", "settings": { "title": "99 Bedside Table" } },
+        { "type": "product", "settings": { "title": "Dancing Bedside" } },
+        
         { "type": "product", "settings": { "title": "Luneta Stool" } },
         { "type": "product", "settings": { "title": "99 Bedside Table" } },
         { "type": "product", "settings": { "title": "Dancing Bedside" } },
