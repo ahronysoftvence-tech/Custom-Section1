@@ -251,7 +251,46 @@
             "active_color": ""
           }
         },
+        "product_XbrQEr": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "image": "shopify://shop_images/image-2.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_TP7TWG": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "image": "shopify://shop_images/image-2.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
         "product_qdnHmQ": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "image": "shopify://shop_images/Untitled_design_1.png",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_LmebAe": {
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
@@ -277,7 +316,33 @@
             "active_color": ""
           }
         },
+        "product_TkXABL": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "image": "shopify://shop_images/golden-podium-display-with-palm-leaves.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
         "product_GD9ktB": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "image": "shopify://shop_images/9554724.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_A7tNwx": {
           "type": "product",
           "settings": {
             "title": "Dancing Cupboard",
@@ -294,9 +359,14 @@
       "block_order": [
         "product_emFH4E",
         "product_CUnEtY",
+        "product_XbrQEr",
+        "product_TP7TWG",
         "product_qdnHmQ",
+        "product_LmebAe",
         "product_DVNaJy",
-        "product_GD9ktB"
+        "product_TkXABL",
+        "product_GD9ktB",
+        "product_A7tNwx"
       ],
       "name": "Interactive Products",
       "settings": {
