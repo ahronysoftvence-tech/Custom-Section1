@@ -334,7 +334,7 @@
         "heading_color": "#111111",
         "title_color": "#b7b7b7",
         "title_active_color": "#111111",
-        "cursor_text": "VIEW",
+        "cursor_text": "view",
         "cursor_bg_color": "#111111",
         "cursor_text_color": "#ffffff",
         "image_transition_duration": 0.6,
