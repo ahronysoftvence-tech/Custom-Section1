@@ -28,7 +28,7 @@
     display: grid;
     grid-template-columns: var(--ifp-left-width, 70%) var(--ifp-right-width, 30%);
     gap: var(--ifp-col-gap, 64px);
-    align-items: start;
+    align-items: stretch;
   }
 
   /* Titles */
@@ -99,7 +99,10 @@
   }
 
   .ifp-preview-sticky {
+    position: sticky;
     top: 10vh;
+    max-height: 80vh;
+    align-self: start;
   }
 
   .ifp-image-stage {
@@ -419,12 +422,14 @@
       });
     }
 
-    /* ---------- Pinned preview (sticky, no external lib required) ---------- */
-    if (pinEnabled && preview) {
+    /* ---------- Pinned preview ---------- */
+    /* Sticky positioning is applied by default in CSS so it works even before
+       JS runs. Here we only need to opt OUT if the merchant disabled pinning. */
+    if (!pinEnabled && preview) {
       var sticky = section.querySelector('[data-ifp-preview-sticky]');
       if (sticky) {
-        sticky.style.position = 'sticky';
-        sticky.style.top = '10vh';
+        sticky.style.position = 'relative';
+        sticky.style.top = '0';
       }
     }
 
