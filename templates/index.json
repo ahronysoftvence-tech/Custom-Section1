@@ -287,6 +287,70 @@
             "enable_block": true,
             "active_color": ""
           }
+        },
+        "product_eacqtJ": {
+          "type": "product",
+          "settings": {
+            "title": "Product title",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_6NXU3g": {
+          "type": "product",
+          "settings": {
+            "title": "Product title",
+            "image": "shopify://shop_images/green_tropical_granite_podium_geometric_plants_decoration_black.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_BxjY7T": {
+          "type": "product",
+          "settings": {
+            "title": "Product title",
+            "image": "shopify://shop_images/image-5.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_YeJWr6": {
+          "type": "product",
+          "settings": {
+            "title": "Product title",
+            "image": "shopify://shop_images/Untitled_design_1.png",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_ztaGzN": {
+          "type": "product",
+          "settings": {
+            "title": "Product title",
+            "image": "shopify://shop_images/3146067.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
         }
       },
       "block_order": [
@@ -294,7 +358,12 @@
         "product_8NnztN",
         "product_dKbzwG",
         "product_HryFgM",
-        "product_7MGBaz"
+        "product_7MGBaz",
+        "product_eacqtJ",
+        "product_6NXU3g",
+        "product_BxjY7T",
+        "product_YeJWr6",
+        "product_ztaGzN"
       ],
       "name": "Interactive Products",
       "settings": {
