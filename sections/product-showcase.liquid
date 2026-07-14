@@ -1,406 +1,583 @@
-{% assign section_id = section.id | replace: '_', '' | downcase %}
-
 {% style %}
-  .nv-product-showcase-{{ section_id }} {
-    display: block;
-    width: 100%;
-    background-color: {{ section.settings.background_color }};
-    padding: {{ section.settings.section_padding }}px {{ section.settings.section_padding_horizontal }}px;
-    position: relative;
-  }
-
-  .nv-product-showcase__header-{{ section_id }} {
-    font-size: 11px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-weight: 600;
-    color: {{ section.settings.header_color }};
-    margin-bottom: 50px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  }
-
-  .nv-product-showcase__container-{{ section_id }} {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 80px;
-    align-items: stretch;
-    max-width: 1600px;
-    margin: 0 auto;
-  }
-
-  .nv-product-showcase__titles-{{ section_id }} {
-    display: flex;
-    flex-direction: column;
-    gap: {{ section.settings.title_spacing }}px;
-  }
-
-  .nv-product-showcase__title-row-{{ section_id }} {
-    position: relative;
-    cursor: pointer;
-    text-decoration: none;
-    display: block;
-    padding: 10px 0;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nv-product-showcase__title-row-{{ section_id }}:hover {
-    transform: translateX(10px);
-  }
-
-  .nv-product-showcase__title-{{ section_id }} {
-    font-size: {{ section.settings.title_font_size }}px;
-    font-family: Georgia, "Times New Roman", serif;
-    font-weight: 400;
-    line-height: 1.2;
-    color: {{ section.settings.inactive_title_color }};
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    margin: 0;
-    position: relative;
-  }
-
-  .nv-product-showcase__title-row-{{ section_id }}:hover .nv-product-showcase__title-{{ section_id }} {
-    color: {{ section.settings.active_title_color }};
-    letter-spacing: 1px;
-  }
-
-  .nv-product-showcase__title-{{ section_id }}::before {
-    content: '';
-    position: absolute;
-    left: -30px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 0;
-    height: 2px;
-    background-color: {{ section.settings.active_title_color }};
-    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  .nv-product-showcase__title-row-{{ section_id }}:hover .nv-product-showcase__title-{{ section_id }}::before {
-    width: 20px;
-  }
-
-  /* Wrapper stretches to match the title column height so the sticky
-     box inside it has room to travel as the list gets longer. */
-  .nv-product-showcase__preview-wrapper-{{ section_id }} {
-    position: relative;
-    height: 100%;
-  }
-
-  .nv-product-showcase__preview-{{ section_id }} {
-    position: sticky;
-    top: {{ section.settings.sticky_offset }}px;
-    height: {{ section.settings.preview_height }}px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .ifp-section {
+    background: var(--ifp-bg, #fff);
+    padding: var(--ifp-pad-desktop, 96px) 24px;
     overflow: hidden;
   }
 
-  .nv-product-showcase__image-wrapper-{{ section_id }} {
-    position: absolute;
-    top: 0;
-    left: 0;
+  .ifp-inner {
+    max-width: var(--ifp-max-width, 1400px);
+    margin: 0 auto;
+  }
+
+  .ifp-header {
+    margin-bottom: 56px;
+  }
+
+  .ifp-eyebrow {
+    display: inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--ifp-heading-color, #111);
+  }
+
+  .ifp-grid {
+    display: grid;
+    grid-template-columns: var(--ifp-left-width, 70%) var(--ifp-right-width, 30%);
+    gap: var(--ifp-col-gap, 64px);
+    align-items: start;
+  }
+
+  /* Titles */
+
+  .ifp-titles {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ifp-title-row {
+    display: flex;
+    flex-direction: column;
+    padding: 22px 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border-left: none;
+    border-right: none;
+    text-align: left;
     width: 100%;
+  }
+
+  .ifp-titles .ifp-title-row:last-child {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .ifp-title-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 6px;
+  }
+
+  .ifp-title-label,
+  .ifp-title-badge {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+  .ifp-title-text {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: var(--ifp-title-size-desktop, 80px);
+    line-height: 1.05;
+    font-weight: 400;
+    color: var(--ifp-title-color, #b7b7b7);
+    transition: color 0.4s ease;
+  }
+
+  .ifp-title-row.is-active .ifp-title-text {
+    color: var(--ifp-title-active-color-custom, var(--ifp-title-active-color, #111));
+  }
+
+  .ifp-title-subtitle {
+    margin-top: 6px;
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.45);
+  }
+
+  /* Preview / image */
+
+  .ifp-preview {
+    position: relative;
     height: 100%;
+  }
+
+  .ifp-preview-sticky {
+    top: 10vh;
+  }
+
+  .ifp-image-stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: var(--ifp-ratio, auto);
+    background: transparent;
+  }
+
+  .ifp-image-wrap {
+    position: absolute;
+    inset: 0;
     opacity: 0;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(0.96);
+    transition:
+      opacity var(--ifp-image-duration, 0.6s) ease,
+      transform var(--ifp-image-duration, 0.6s) ease;
     pointer-events: none;
-    transform: scale(0.95);
   }
 
-  .nv-product-showcase__image-wrapper-{{ section_id }}.active {
+  .ifp-image-wrap.is-active {
     opacity: 1;
-    pointer-events: auto;
     transform: scale(1);
+    pointer-events: auto;
   }
 
-  .nv-product-showcase__image-{{ section_id }} {
+  .ifp-image,
+  .ifp-image-placeholder {
     display: block;
     width: 100%;
     height: 100%;
-    color: #C0BBAF;
-    {% if section.settings.image_ratio == 'contain' %}
-      object-fit: contain;
-    {% else %}
-      object-fit: cover;
-    {% endif %}
   }
 
-  .nv-product-showcase__cursor-{{ section_id }} {
+  .ifp-image-placeholder svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  .ifp-image--cover {
+    object-fit: cover;
+  }
+
+  .ifp-image--contain {
+    object-fit: contain;
+  }
+
+  /* Cursor follower */
+
+  .ifp-cursor {
     position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 2px;
-    color: {{ section.settings.cursor_text_color }};
-    background-color: {{ section.settings.cursor_bg_color }};
-    padding: 10px 20px;
-    border-radius: 30px;
+    top: 0;
+    left: 0;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    background: var(--ifp-cursor-bg, #111);
+    color: var(--ifp-cursor-text-color, #fff);
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     opacity: 0;
-    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translate(-50%, -50%) scale(0.8);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    white-space: nowrap;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    will-change: transform;
   }
 
-  .nv-product-showcase__cursor-{{ section_id }}.visible {
+  .ifp-cursor.is-visible {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
   }
 
-  @media screen and (max-width: 989px) {
-    .nv-product-showcase__container-{{ section_id }} {
+  /* Reduced motion */
+
+  .ifp-reduced-motion .ifp-title-text,
+  .ifp-reduced-motion .ifp-image-wrap,
+  .ifp-reduced-motion .ifp-cursor {
+    transition: none !important;
+  }
+
+  /* Tablet */
+
+  @media (max-width: 989px) {
+    .ifp-section {
+      padding: var(--ifp-pad-tablet, 64px) 20px;
+    }
+
+    .ifp-title-text {
+      font-size: var(--ifp-title-size-tablet, 56px);
+    }
+
+    .ifp-grid {
+      gap: 40px;
+    }
+  }
+
+  /* Mobile: stacked, titles first, image below */
+
+  @media (max-width: 749px) {
+    .ifp-section {
+      padding: var(--ifp-pad-mobile, 40px) 16px;
+    }
+
+    .ifp-grid {
       grid-template-columns: 1fr;
-      gap: 50px;
     }
 
-    .nv-product-showcase__preview-wrapper-{{ section_id }} {
-      height: auto;
+    .ifp-preview {
+      order: 2;
+      margin-top: 32px;
     }
 
-    .nv-product-showcase__preview-{{ section_id }} {
-      position: relative;
-      top: 0;
-      height: 450px;
-      width: 100%;
+    .ifp-titles {
+      order: 1;
     }
 
-    .nv-product-showcase__title-{{ section_id }} {
-      font-size: {{ section.settings.title_font_size | times: 0.6 }}px;
+    .ifp-preview-sticky {
+      position: relative !important;
+      top: 0 !important;
     }
 
-    .nv-product-showcase__cursor-{{ section_id }} {
+    .ifp-title-text {
+      font-size: var(--ifp-title-size-mobile, 38px);
+    }
+
+    .ifp-cursor {
       display: none;
-    }
-  }
-
-  @media screen and (max-width: 749px) {
-    .nv-product-showcase__preview-{{ section_id }} {
-      height: 350px;
-    }
-
-    .nv-product-showcase__title-{{ section_id }} {
-      font-size: {{ section.settings.title_font_size | times: 0.45 }}px;
-    }
-
-    .nv-product-showcase__container-{{ section_id }} {
-      gap: 30px;
     }
   }
 {% endstyle %}
 
-<nv-product-showcase-{{ section_id }} class="nv-product-showcase-{{ section_id }}">
-  <div class="nv-product-showcase__header-{{ section_id }}">
-    {{ section.settings.section_header }}
-  </div>
+{%- liquid
+  assign section_id = section.id
+  assign settings = section.settings
+  assign blocks = section.blocks
+-%}
 
-  <div class="nv-product-showcase__container-{{ section_id }}">
-    <div class="nv-product-showcase__titles-{{ section_id }}" data-product-list>
-      {% for block in section.blocks %}
-        <a
-          href="{{ block.settings.url }}"
-          class="nv-product-showcase__title-row-{{ section_id }}"
-          data-product-index="{{ forloop.index0 }}"
-          {{ block.shopify_attributes }}
-        >
-          <h2 class="nv-product-showcase__title-{{ section_id }}">{{ block.settings.title }}</h2>
-        </a>
-      {% endfor %}
-    </div>
+<section
+  id="ifp-{{ section_id }}"
+  class="ifp-section"
+  data-ifp-section
+  data-hover-enabled="{{ settings.enable_hover }}"
+  data-scroll-enabled="{{ settings.enable_scroll }}"
+  data-pin-enabled="{{ settings.enable_pin }}"
+  data-cursor-enabled="{{ settings.enable_cursor }}"
+  data-fade-enabled="{{ settings.enable_image_fade }}"
+  style="
+    --ifp-bg: {{ settings.bg_color }};
+    --ifp-heading-color: {{ settings.heading_color }};
+    --ifp-title-color: {{ settings.title_color }};
+    --ifp-title-active-color: {{ settings.title_active_color }};
+    --ifp-cursor-text-color: {{ settings.cursor_text_color }};
+    --ifp-cursor-bg: {{ settings.cursor_bg_color }};
+    --ifp-image-duration: {{ settings.image_transition_duration | default: 0.6 }}s;
+    --ifp-title-size-desktop: {{ settings.title_size_desktop | default: 80 }}px;
+    --ifp-title-size-tablet: {{ settings.title_size_tablet | default: 56 }}px;
+    --ifp-title-size-mobile: {{ settings.title_size_mobile | default: 38 }}px;
+    --ifp-max-width: {{ settings.max_width | default: 1400 }}px;
+    --ifp-left-width: {{ settings.left_width | default: 70 }}%;
+    --ifp-right-width: {{ settings.right_width | default: 30 }}%;
+    --ifp-col-gap: {{ settings.column_gap | default: 64 }}px;
+    --ifp-pad-desktop: {{ settings.padding_desktop | default: 96 }}px;
+    --ifp-pad-tablet: {{ settings.padding_tablet | default: 64 }}px;
+    --ifp-pad-mobile: {{ settings.padding_mobile | default: 40 }}px;
+  "
+>
+  <div class="ifp-inner">
 
-    <div class="nv-product-showcase__preview-wrapper-{{ section_id }}">
-      <div class="nv-product-showcase__preview-{{ section_id }}" data-preview-container>
-        {% assign placeholder_class = 'nv-product-showcase__image-' | append: section_id %}
-        {% for block in section.blocks %}
-          <div
-            class="nv-product-showcase__image-wrapper-{{ section_id }}{% if forloop.first %} active{% endif %}"
-            data-image-index="{{ forloop.index0 }}"
-          >
-            {% if block.settings.image != blank %}
-              <img
-                src="{{ block.settings.image | image_url: width: 1000 }}"
-                alt="{{ block.settings.title | escape }}"
-                class="nv-product-showcase__image-{{ section_id }}"
-                loading="lazy"
-                width="1000"
-                height="1000"
-              >
-            {% else %}
-              {{ 'product-1' | placeholder_svg_tag: placeholder_class }}
-            {% endif %}
-          </div>
-        {% endfor %}
+    {%- if settings.heading != blank -%}
+      <div class="ifp-header">
+        <span class="ifp-eyebrow">{{ settings.heading }}</span>
       </div>
+    {%- endif -%}
+
+    <div class="ifp-grid">
+
+      <div class="ifp-titles" data-ifp-titles role="list">
+        {%- for block in blocks -%}
+          {%- if block.settings.enable_block -%}
+            {%- liquid
+              assign img = block.settings.image
+              assign product_url = block.settings.product_url
+              assign title = block.settings.title
+              assign subtitle = block.settings.subtitle
+              assign label = block.settings.label
+              assign badge = block.settings.badge
+              assign active_color = block.settings.active_color
+            -%}
+            {%- assign tag = 'div' -%}
+            {%- if product_url != blank -%}{%- assign tag = 'a' -%}{%- endif -%}
+            <{{ tag }}
+              {% if tag == 'a' %}href="{{ product_url }}"{% endif %}
+              class="ifp-title-row{% if forloop.first %} is-active{% endif %}"
+              data-ifp-title
+              data-index="{{ forloop.index0 }}"
+              data-target="ifp-img-{{ section_id }}-{{ forloop.index0 }}"
+              {% if active_color != blank %}style="--ifp-title-active-color-custom: {{ active_color }};"{% endif %}
+              role="listitem"
+              {{ block.shopify_attributes }}
+            >
+              <span class="ifp-title-meta">
+                {%- if label != blank -%}<span class="ifp-title-label">{{ label }}</span>{%- endif -%}
+                {%- if badge != blank -%}<span class="ifp-title-badge">{{ badge }}</span>{%- endif -%}
+              </span>
+              <span class="ifp-title-text">{{ title }}</span>
+              {%- if subtitle != blank -%}
+                <span class="ifp-title-subtitle">{{ subtitle }}</span>
+              {%- endif -%}
+            </{{ tag }}>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      <div class="ifp-preview" data-ifp-preview>
+        <div class="ifp-preview-sticky" data-ifp-preview-sticky>
+          <div class="ifp-image-stage" data-ifp-image-stage style="--ifp-ratio: {% case settings.image_ratio %}{% when 'square' or '1:1' %}1/1{% when 'portrait' %}4/5{% when 'landscape' %}16/9{% when '4:5' %}4/5{% when '3:4' %}3/4{% when '16:9' %}16/9{% else %}auto{% endcase %};">
+            {%- for block in blocks -%}
+              {%- if block.settings.enable_block -%}
+                {%- assign img = block.settings.image -%}
+                <div
+                  class="ifp-image-wrap{% if forloop.first %} is-active{% endif %}"
+                  id="ifp-img-{{ section_id }}-{{ forloop.index0 }}"
+                  data-ifp-image
+                >
+                  {%- if img != blank -%}
+                    <img
+                      src="{{ img | image_url: width: 1400 }}"
+                      srcset="{{ img | image_url: width: 600 }} 600w, {{ img | image_url: width: 900 }} 900w, {{ img | image_url: width: 1400 }} 1400w"
+                      sizes="(max-width: 749px) 90vw, 30vw"
+                      alt="{{ block.settings.title | escape }}"
+                      loading="{% unless forloop.first %}lazy{% else %}eager{% endunless %}"
+                      class="ifp-image ifp-image--{{ settings.image_fit | default: 'cover' }}"
+                      style="object-position: {{ settings.image_position | default: 'center' }};"
+                      width="900"
+                      height="1100"
+                    >
+                  {%- else -%}
+                    <div class="ifp-image-placeholder">
+                      {{ 'lifestyle-1' | placeholder_svg_tag }}
+                    </div>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <div class="nv-product-showcase__cursor-{{ section_id }}" data-custom-cursor>
-    {{ section.settings.cursor_text }}
-  </div>
-</nv-product-showcase-{{ section_id }}>
+  {%- if settings.enable_cursor -%}
+    <div class="ifp-cursor" data-ifp-cursor aria-hidden="true">
+      <span>{{ settings.cursor_text | default: 'VIEW' }}</span>
+    </div>
+  {%- endif -%}
+</section>
 
 <script>
-  (function() {
-    class NvProductShowcase{{ section_id }} extends HTMLElement {
-      constructor() {
-        super();
-        this.productList = this.querySelector('[data-product-list]');
-        this.customCursor = this.querySelector('[data-custom-cursor]');
-        this.titleRows = this.querySelectorAll('[data-product-index]');
-        this.imageWrappers = this.querySelectorAll('[data-image-index]');
-        this.currentIndex = 0;
-        this.cursorX = 0;
-        this.cursorY = 0;
-        this.currentX = 0;
-        this.currentY = 0;
-        this.rafId = null;
-      }
+  (function () {
+    var section = document.getElementById('ifp-{{ section_id }}');
+    if (!section) return;
 
-      connectedCallback() {
-        const activeImage = this.querySelector('[data-image-index].active');
-        this.currentIndex = activeImage ? parseInt(activeImage.getAttribute('data-image-index')) : 0;
-        this.setupHoverListeners();
-        this.setupCursorTracking();
-        this.setupScrollObserver();
-        this.animateCursor();
-      }
+    var hoverEnabled = section.dataset.hoverEnabled === 'true';
+    var scrollEnabled = section.dataset.scrollEnabled === 'true';
+    var pinEnabled = section.dataset.pinEnabled === 'true';
+    var cursorEnabled = section.dataset.cursorEnabled === 'true';
 
-      disconnectedCallback() {
-        if (this.rafId) cancelAnimationFrame(this.rafId);
-        if (this.observer) this.observer.disconnect();
-      }
+    var titles = Array.prototype.slice.call(section.querySelectorAll('[data-ifp-title]'));
+    var images = Array.prototype.slice.call(section.querySelectorAll('[data-ifp-image]'));
+    var preview = section.querySelector('[data-ifp-preview]');
+    var stage = section.querySelector('[data-ifp-image-stage]');
+    var cursor = section.querySelector('[data-ifp-cursor]');
 
-      setupScrollObserver() {
-        const options = {
+    if (!titles.length || !images.length) return;
+
+    function setActive(index) {
+      titles.forEach(function (t, i) {
+        t.classList.toggle('is-active', i === index);
+      });
+      images.forEach(function (img, i) {
+        img.classList.toggle('is-active', i === index);
+      });
+    }
+
+    /* ---------- Hover interaction ---------- */
+    if (hoverEnabled) {
+      titles.forEach(function (title, i) {
+        title.addEventListener('mouseenter', function () {
+          setActive(i);
+        });
+      });
+    }
+
+    /* ---------- Scroll-driven interaction ---------- */
+    if (scrollEnabled && 'IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var idx = titles.indexOf(entry.target);
+              if (idx > -1) setActive(idx);
+            }
+          });
+        },
+        {
           root: null,
           rootMargin: '-45% 0px -45% 0px',
           threshold: 0
-        };
-
-        this.observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const index = parseInt(entry.target.getAttribute('data-product-index'));
-              this.switchImage(index);
-            }
-          });
-        }, options);
-
-        this.titleRows.forEach((row) => this.observer.observe(row));
-      }
-
-      setupHoverListeners() {
-        this.titleRows.forEach((row) => {
-          row.addEventListener('mouseenter', () => {
-            this.switchImage(parseInt(row.getAttribute('data-product-index')));
-          });
-        });
-
-        if (this.productList && this.customCursor) {
-          this.productList.addEventListener('mouseenter', () => {
-            this.customCursor.classList.add('visible');
-          });
-          this.productList.addEventListener('mouseleave', () => {
-            this.customCursor.classList.remove('visible');
-          });
         }
-      }
+      );
+      titles.forEach(function (title) {
+        observer.observe(title);
+      });
+    }
 
-      setupCursorTracking() {
-        if (this.productList) {
-          this.productList.addEventListener('mousemove', (e) => {
-            this.cursorX = e.clientX;
-            this.cursorY = e.clientY;
-          });
-        }
-      }
-
-      animateCursor() {
-        if (!this.customCursor) return;
-        const ease = 0.18;
-        const animate = () => {
-          this.currentX += (this.cursorX - this.currentX) * ease;
-          this.currentY += (this.cursorY - this.currentY) * ease;
-          this.customCursor.style.left = this.currentX + 'px';
-          this.customCursor.style.top = this.currentY + 'px';
-          this.rafId = requestAnimationFrame(animate);
-        };
-        animate();
-      }
-
-      switchImage(index) {
-        if (index === this.currentIndex) return;
-        this.imageWrappers.forEach((wrapper) => wrapper.classList.remove('active'));
-        const target = this.querySelector(`[data-image-index="${index}"]`);
-        if (target) {
-          target.classList.add('active');
-          this.currentIndex = index;
-        }
+    /* ---------- Pinned preview (sticky, no external lib required) ---------- */
+    if (pinEnabled && preview) {
+      var sticky = section.querySelector('[data-ifp-preview-sticky]');
+      if (sticky) {
+        sticky.style.position = 'sticky';
+        sticky.style.top = '10vh';
       }
     }
 
-    if (!customElements.get('nv-product-showcase-{{ section_id }}')) {
-      customElements.define('nv-product-showcase-{{ section_id }}', NvProductShowcase{{ section_id }});
+    /* ---------- Custom floating cursor ---------- */
+    if (cursorEnabled && cursor) {
+      var titlesWrap = section.querySelector('[data-ifp-titles]');
+      var mouseX = 0, mouseY = 0, curX = 0, curY = 0, raf = null;
+      var visible = false;
+
+      function loop() {
+        curX += (mouseX - curX) * 0.18;
+        curY += (mouseY - curY) * 0.18;
+        cursor.style.transform = 'translate3d(' + curX + 'px,' + curY + 'px,0) translate(-50%, -50%)';
+        raf = requestAnimationFrame(loop);
+      }
+
+      function show() {
+        if (!visible) {
+          visible = true;
+          cursor.classList.add('is-visible');
+          if (!raf) loop();
+        }
+      }
+
+      function hide() {
+        visible = false;
+        cursor.classList.remove('is-visible');
+      }
+
+      if (titlesWrap) {
+        titlesWrap.addEventListener('mousemove', function (e) {
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+          show();
+        });
+        titlesWrap.addEventListener('mouseleave', hide);
+      }
+    }
+
+    /* Prefers reduced motion: disable fancy easing */
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      section.classList.add('ifp-reduced-motion');
     }
   })();
 </script>
 
 {% schema %}
 {
-  "name": "Product showcase",
+  "name": "Interactive Products",
+  "tag": "section",
+  "class": "shopify-section--ifp",
   "settings": [
-    { "type": "header", "content": "Section header" },
-    { "type": "text", "id": "section_header", "label": "Header text", "default": "FEATURED PRODUCTS" },
-    { "type": "color", "id": "header_color", "label": "Header color", "default": "#666666" },
+    { "type": "header", "content": "Content" },
+    { "type": "text", "id": "heading", "label": "Section heading", "default": "FEATURED PRODUCTS" },
+
+    { "type": "header", "content": "Colors" },
+    { "type": "color", "id": "bg_color", "label": "Background color", "default": "#FFFFFF" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#111111" },
+    { "type": "color", "id": "title_color", "label": "Default title color", "default": "#B7B7B7" },
+    { "type": "color", "id": "title_active_color", "label": "Active title color", "default": "#111111" },
+
+    { "type": "header", "content": "Cursor Follower" },
+    { "type": "text", "id": "cursor_text", "label": "Cursor label text", "default": "VIEW" },
+    { "type": "color", "id": "cursor_bg_color", "label": "Cursor background", "default": "#111111" },
+    { "type": "color", "id": "cursor_text_color", "label": "Cursor text color", "default": "#FFFFFF" },
+
+    { "type": "header", "content": "Animation" },
+    { "type": "range", "id": "image_transition_duration", "label": "Image transition duration (s)", "min": 0.2, "max": 1.2, "step": 0.1, "default": 0.6 },
+    { "type": "checkbox", "id": "enable_hover", "label": "Enable hover interaction", "default": true },
+    { "type": "checkbox", "id": "enable_scroll", "label": "Enable scroll-driven interaction", "default": true },
+    { "type": "checkbox", "id": "enable_pin", "label": "Enable pinned image preview", "default": true },
+    { "type": "checkbox", "id": "enable_cursor", "label": "Enable cursor follower", "default": true },
+    { "type": "checkbox", "id": "enable_image_fade", "label": "Enable image fade animation", "default": true },
+
+    { "type": "header", "content": "Typography" },
+    { "type": "range", "id": "title_size_desktop", "label": "Title size — Desktop (px)", "min": 40, "max": 100, "step": 1, "default": 80 },
+    { "type": "range", "id": "title_size_tablet", "label": "Title size — Tablet (px)", "min": 30, "max": 70, "step": 1, "default": 56 },
+    { "type": "range", "id": "title_size_mobile", "label": "Title size — Mobile (px)", "min": 24, "max": 50, "step": 1, "default": 38 },
+
     { "type": "header", "content": "Layout" },
-    { "type": "color", "id": "background_color", "label": "Background", "default": "#EAE6DF" },
-    { "type": "range", "id": "section_padding", "label": "Vertical padding", "min": 20, "max": 150, "step": 10, "unit": "px", "default": 80 },
-    { "type": "range", "id": "section_padding_horizontal", "label": "Horizontal padding", "min": 20, "max": 150, "step": 10, "unit": "px", "default": 40 },
-    { "type": "header", "content": "Product titles" },
-    { "type": "range", "id": "title_font_size", "label": "Font size", "min": 40, "max": 120, "step": 5, "unit": "px", "default": 70 },
-    { "type": "range", "id": "title_spacing", "label": "Spacing", "min": 10, "max": 60, "step": 5, "unit": "px", "default": 25 },
-    { "type": "color", "id": "inactive_title_color", "label": "Inactive color", "default": "#C0BBAF" },
-    { "type": "color", "id": "active_title_color", "label": "Active color", "default": "#000000" },
-    { "type": "header", "content": "Image preview" },
-    { "type": "range", "id": "preview_height", "label": "Height", "min": 400, "max": 800, "step": 50, "unit": "px", "default": 600 },
-    { "type": "range", "id": "sticky_offset", "label": "Sticky top offset", "min": 0, "max": 150, "step": 5, "unit": "px", "default": 20 },
+    { "type": "range", "id": "max_width", "label": "Section max width (px)", "min": 1000, "max": 1800, "step": 20, "default": 1400 },
+    { "type": "range", "id": "left_width", "label": "Left column width (%)", "min": 50, "max": 80, "step": 1, "default": 70 },
+    { "type": "range", "id": "right_width", "label": "Right column width (%)", "min": 20, "max": 50, "step": 1, "default": 30 },
+    { "type": "range", "id": "column_gap", "label": "Gap between columns (px)", "min": 0, "max": 160, "step": 4, "default": 64 },
+    { "type": "range", "id": "padding_desktop", "label": "Desktop padding (px)", "min": 40, "max": 160, "step": 4, "default": 96 },
+    { "type": "range", "id": "padding_tablet", "label": "Tablet padding (px)", "min": 24, "max": 120, "step": 4, "default": 64 },
+    { "type": "range", "id": "padding_mobile", "label": "Mobile padding (px)", "min": 16, "max": 80, "step": 4, "default": 40 },
+
+    { "type": "header", "content": "Image" },
     {
       "type": "select",
       "id": "image_ratio",
+      "label": "Image ratio",
+      "options": [
+        { "value": "adapt", "label": "Adapt to image" },
+        { "value": "square", "label": "Square" },
+        { "value": "portrait", "label": "Portrait" },
+        { "value": "landscape", "label": "Landscape" },
+        { "value": "4:5", "label": "4:5" },
+        { "value": "3:4", "label": "3:4" },
+        { "value": "16:9", "label": "16:9" },
+        { "value": "1:1", "label": "1:1" }
+      ],
+      "default": "portrait"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
       "label": "Image fit",
       "options": [
-        { "value": "contain", "label": "Contain" },
-        { "value": "cover", "label": "Cover" }
+        { "value": "cover", "label": "Cover" },
+        { "value": "contain", "label": "Contain" }
       ],
-      "default": "contain"
+      "default": "cover"
     },
-    { "type": "header", "content": "Custom cursor" },
-    { "type": "text", "id": "cursor_text", "label": "Text", "default": "VIEW" },
-    { "type": "color", "id": "cursor_text_color", "label": "Text color", "default": "#FFFFFF" },
-    { "type": "color", "id": "cursor_bg_color", "label": "Background", "default": "#000000" }
+    {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "center", "label": "Center" },
+        { "value": "top", "label": "Top" },
+        { "value": "bottom", "label": "Bottom" }
+      ],
+      "default": "center"
+    }
   ],
   "blocks": [
     {
-      "type": "product_row",
-      "name": "Product row",
+      "type": "product",
+      "name": "Product",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Product name" },
+        { "type": "text", "id": "title", "label": "Product title", "default": "Product title" },
         { "type": "image_picker", "id": "image", "label": "Image" },
-        { "type": "url", "id": "url", "label": "Link" }
+        { "type": "url", "id": "product_url", "label": "Product link" },
+        { "type": "text", "id": "subtitle", "label": "Subtitle (optional)" },
+        { "type": "text", "id": "label", "label": "Small label (optional)" },
+        { "type": "text", "id": "badge", "label": "Badge (optional)" },
+        { "type": "checkbox", "id": "enable_block", "label": "Enable this block", "default": true },
+        { "type": "color", "id": "active_color", "label": "Custom active color (optional)" }
       ]
     }
   ],
+  "max_blocks": 10,
   "presets": [
     {
-      "name": "Product showcase",
+      "name": "Interactive Products",
       "blocks": [
-        { "type": "product_row", "settings": { "title": "Dining Windsor" } },
-        { "type": "product_row", "settings": { "title": "Luneta Stool" } },
-        { "type": "product_row", "settings": { "title": "99 Bedside Table" } },
-        { "type": "product_row", "settings": { "title": "Dancing Bedside" } },
-        { "type": "product_row", "settings": { "title": "Dancing Cupboard" } }
+        { "type": "product", "settings": { "title": "Dining Windsor" } },
+        { "type": "product", "settings": { "title": "Luneta Stool" } },
+        { "type": "product", "settings": { "title": "99 Bedside Table" } },
+        { "type": "product", "settings": { "title": "Dancing Bedside" } },
+        { "type": "product", "settings": { "title": "Dancing Cupboard" } }
       ]
     }
   ]
