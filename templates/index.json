@@ -229,6 +229,7 @@
           "type": "product",
           "settings": {
             "title": "Dining Windsor",
+            "image": "shopify://shop_images/image-3.jpg",
             "product_url": "",
             "subtitle": "",
             "label": "",
@@ -241,6 +242,7 @@
           "type": "product",
           "settings": {
             "title": "Luneta Stool",
+            "image": "shopify://shop_images/3146067.jpg",
             "product_url": "",
             "subtitle": "",
             "label": "",
@@ -253,6 +255,7 @@
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
+            "image": "shopify://shop_images/3146067.jpg",
             "product_url": "",
             "subtitle": "",
             "label": "",
@@ -289,6 +292,7 @@
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
+            "image": "shopify://shop_images/Untitled_design_1.png",
             "product_url": "",
             "subtitle": "",
             "label": "",
@@ -301,6 +305,7 @@
           "type": "product",
           "settings": {
             "title": "Dancing Bedside",
+            "image": "shopify://shop_images/image-5.jpg",
             "product_url": "",
             "subtitle": "",
             "label": "",
@@ -313,6 +318,7 @@
           "type": "product",
           "settings": {
             "title": "Luneta Stool",
+            "image": "shopify://shop_images/stage-design-with-christmas-concept-element.jpg",
             "product_url": "",
             "subtitle": "",
             "label": "",
@@ -337,6 +343,7 @@
           "type": "product",
           "settings": {
             "title": "Dancing Bedside",
+            "image": "shopify://shop_images/green_tropical_granite_podium_geometric_plants_decoration_black.jpg",
             "product_url": "",
             "subtitle": "",
             "label": "",
