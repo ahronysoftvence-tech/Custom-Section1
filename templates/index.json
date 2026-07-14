@@ -221,75 +221,6 @@
         "margin_bottom": 0,
         "content_alignment": "center"
       }
-    },
-    "product_showcase_xFjq8L": {
-      "type": "product-showcase",
-      "blocks": {
-        "product_row_Xp7kaY": {
-          "type": "product_row",
-          "settings": {
-            "title": "Dining Windsor",
-            "image": "shopify://shop_images/image-5.jpg",
-            "url": ""
-          }
-        },
-        "product_row_WEFJBC": {
-          "type": "product_row",
-          "settings": {
-            "title": "Luneta Stool",
-            "image": "shopify://shop_images/empty_wooden_table_space_platform_nature_background_product_display.jpg",
-            "url": ""
-          }
-        },
-        "product_row_Pz6Vtr": {
-          "type": "product_row",
-          "settings": {
-            "title": "99 Bedside Table",
-            "image": "shopify://shop_images/21126.jpg",
-            "url": ""
-          }
-        },
-        "product_row_pbU6CV": {
-          "type": "product_row",
-          "settings": {
-            "title": "Dancing Bedside",
-            "image": "shopify://shop_images/4187793.jpg",
-            "url": ""
-          }
-        },
-        "product_row_YbCdwt": {
-          "type": "product_row",
-          "settings": {
-            "title": "Dancing Cupboard",
-            "url": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_row_Xp7kaY",
-        "product_row_WEFJBC",
-        "product_row_Pz6Vtr",
-        "product_row_pbU6CV",
-        "product_row_YbCdwt"
-      ],
-      "name": "Product showcase",
-      "settings": {
-        "section_header": "FEATURED PRODUCTS",
-        "header_color": "#666666",
-        "background_color": "#EAE6DF",
-        "section_padding": 80,
-        "section_padding_horizontal": 40,
-        "title_font_size": 70,
-        "title_spacing": 25,
-        "inactive_title_color": "#C0BBAF",
-        "active_title_color": "#000000",
-        "preview_height": 600,
-        "sticky_offset": 20,
-        "image_ratio": "contain",
-        "cursor_text": "VIEW",
-        "cursor_text_color": "#FFFFFF",
-        "cursor_bg_color": "#000000"
-      }
     }
   },
   "order": [
@@ -298,7 +229,6 @@
     "image_comparison_Uyq4bW",
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX",
-    "gsap_richtext_XAqnLj",
-    "product_showcase_xFjq8L"
+    "gsap_richtext_XAqnLj"
   ]
 }
