@@ -420,14 +420,19 @@
       const previewWrap = section.querySelector('[data-ifp-preview]');
       let mouseX = 0;
       let mouseY = 0;
-      let curX = 0;
-      let curY = 0;
+      {% comment %} let curX = 0;
+      let curY = 0; {% endcomment %}
       let raf = null;
       let visible = false;
 
-      function loop() {
+      {% comment %} function loop() {
         curX += (mouseX - curX) * 0.18;
-        curY += (mouseY - curY) * 0.18;
+        curY += (mouseY - curY) * 0.18; {% endcomment %}
+        function trackMouse(e) {
+  cursor.style.transform =
+    `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+  show();
+}
         cursor.style.transform = 'translate3d(' + curX + 'px,' + curY + 'px,0) translate(-50%, -50%)';
         raf = requestAnimationFrame(loop);
       }
