@@ -221,6 +221,113 @@
         "margin_bottom": 0,
         "content_alignment": "center"
       }
+    },
+    "product_showcase_8HqacU": {
+      "type": "product-showcase",
+      "blocks": {
+        "product_emFH4E": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "image": "shopify://shop_images/image-1.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_CUnEtY": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "image": "shopify://shop_images/image-2.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_qdnHmQ": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "image": "shopify://shop_images/Untitled_design_1.png",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_DVNaJy": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "image": "shopify://shop_images/golden-podium-display-with-palm-leaves.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        },
+        "product_GD9ktB": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "image": "shopify://shop_images/9554724.jpg",
+            "product_url": "",
+            "subtitle": "",
+            "label": "",
+            "badge": "",
+            "enable_block": true,
+            "active_color": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_emFH4E",
+        "product_CUnEtY",
+        "product_qdnHmQ",
+        "product_DVNaJy",
+        "product_GD9ktB"
+      ],
+      "name": "Interactive Products",
+      "settings": {
+        "heading": "FEATURED PRODUCTS",
+        "bg_color": "#FFFFFF",
+        "heading_color": "#111111",
+        "title_color": "#B7B7B7",
+        "title_active_color": "#111111",
+        "cursor_text": "VIEW",
+        "cursor_bg_color": "#111111",
+        "cursor_text_color": "#FFFFFF",
+        "image_transition_duration": 0.6,
+        "enable_hover": true,
+        "enable_scroll": true,
+        "enable_pin": true,
+        "enable_cursor": true,
+        "enable_image_fade": true,
+        "title_size_desktop": 80,
+        "title_size_tablet": 56,
+        "title_size_mobile": 38,
+        "max_width": 1400,
+        "left_width": 70,
+        "right_width": 30,
+        "column_gap": 64,
+        "padding_desktop": 96,
+        "padding_tablet": 64,
+        "padding_mobile": 40,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "image_position": "center"
+      }
     }
   },
   "order": [
@@ -229,6 +336,7 @@
     "image_comparison_Uyq4bW",
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX",
-    "gsap_richtext_XAqnLj"
+    "gsap_richtext_XAqnLj",
+    "product_showcase_8HqacU"
   ]
 }
