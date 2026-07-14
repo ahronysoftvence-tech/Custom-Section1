@@ -2,7 +2,6 @@
   .ifp-section {
     background: var(--ifp-bg, #fff);
     padding: var(--ifp-pad-desktop, 96px) 24px;
-    overflow: hidden;
   }
 
   .ifp-inner {
@@ -96,19 +95,17 @@
   .ifp-preview-sticky {
     position: sticky;
     top: 0;
-    height: 100vh;
+    height: 100%;
+    max-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   .ifp-image-stage {
-    max-height: 80vh;
-  }
-
-  .ifp-image-stage {
     position: relative;
     width: 100%;
+    max-height: 80vh;
     aspect-ratio: var(--ifp-ratio, auto);
     background: transparent;
   }
@@ -532,7 +529,7 @@
     { "type": "checkbox", "id": "enable_hover", "label": "Enable hover interaction", "default": true },
     { "type": "checkbox", "id": "enable_scroll", "label": "Enable scroll-driven interaction", "default": true },
     { "type": "checkbox", "id": "enable_pin", "label": "Enable pinned image preview", "default": true },
-    { "type": "checkbox", "id": "enable_cursor", "label": "Enable cursor follower", "default": true },
+    { "type": "checkbox", "id": "enable_cursor", "label": "Enable custom animated cursor (off = normal cursor)", "default": false },
     { "type": "checkbox", "id": "enable_image_fade", "label": "Enable image fade animation", "default": true },
 
     { "type": "header", "content": "Typography" },
@@ -610,18 +607,6 @@
       "name": "Interactive Products",
       "blocks": [
         { "type": "product", "settings": { "title": "Dining Windsor" } },
-        { "type": "product", "settings": { "title": "Luneta Stool" } },
-        { "type": "product", "settings": { "title": "99 Bedside Table" } },
-        { "type": "product", "settings": { "title": "Dancing Bedside" } },
-        
-        { "type": "product", "settings": { "title": "Luneta Stool" } },
-        { "type": "product", "settings": { "title": "99 Bedside Table" } },
-        { "type": "product", "settings": { "title": "Dancing Bedside" } },
-        
-        { "type": "product", "settings": { "title": "Luneta Stool" } },
-        { "type": "product", "settings": { "title": "99 Bedside Table" } },
-        { "type": "product", "settings": { "title": "Dancing Bedside" } },
-        
         { "type": "product", "settings": { "title": "Luneta Stool" } },
         { "type": "product", "settings": { "title": "99 Bedside Table" } },
         { "type": "product", "settings": { "title": "Dancing Bedside" } },
