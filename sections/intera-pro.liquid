@@ -83,8 +83,7 @@
   .ifp-preview-sticky {
     position: sticky !important;
     top: 0 !important;
-    bottom: 0 !important;
-    height: 100vh;
+    height: auto;
     max-height: 100vh;
     display: flex;
     align-items: center;
@@ -423,7 +422,6 @@
       if (sticky) {
         sticky.style.position = 'relative';
         sticky.style.top = '0';
-        sticky.style.bottom = 'auto';
         sticky.style.height = 'auto';
         sticky.style.maxHeight = 'none';
       }
