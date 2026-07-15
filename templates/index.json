@@ -326,6 +326,123 @@
       "name": "Product showcase",
       "settings": {
         "heading": "FEATURED PRODUCTS",
+        "bg_color": "#eae6df",
+        "heading_color": "#666666",
+        "title_color": "#c0bbaf",
+        "title_active_color": "#000000",
+        "cursor_text": "VIEW",
+        "cursor_bg_color": "#000000",
+        "cursor_text_color": "#ffffff",
+        "image_transition_duration": 0.6,
+        "enable_hover": true,
+        "enable_scroll": true,
+        "enable_pin": true,
+        "enable_cursor": false,
+        "enable_image_fade": true,
+        "title_size_desktop": 80,
+        "title_size_tablet": 56,
+        "title_size_mobile": 38,
+        "max_width": 1400,
+        "left_width": 70,
+        "right_width": 30,
+        "column_gap": 64,
+        "padding_desktop": 96,
+        "padding_tablet": 64,
+        "padding_mobile": 40,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "image_position": "center"
+      }
+    },
+    "intera_pro_Ud38Qj": {
+      "type": "intera-pro",
+      "blocks": {
+        "product_H6y4Ef": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "product_url": ""
+          }
+        },
+        "product_tQpxz3": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "product_url": ""
+          }
+        },
+        "product_mGV99R": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "product_url": ""
+          }
+        },
+        "product_neY6q6": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "product_url": ""
+          }
+        },
+        "product_dwm3Ym": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "product_url": ""
+          }
+        },
+        "product_F63k7T": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "product_url": ""
+          }
+        },
+        "product_gJjEnR": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "product_url": ""
+          }
+        },
+        "product_AQKN6g": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "product_url": ""
+          }
+        },
+        "product_FbGDmq": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "product_url": ""
+          }
+        },
+        "product_TUpcbG": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_H6y4Ef",
+        "product_tQpxz3",
+        "product_mGV99R",
+        "product_neY6q6",
+        "product_dwm3Ym",
+        "product_F63k7T",
+        "product_gJjEnR",
+        "product_AQKN6g",
+        "product_FbGDmq",
+        "product_TUpcbG"
+      ],
+      "name": "intar-pro",
+      "settings": {
+        "heading": "FEATURED PRODUCTS",
         "bg_color": "#EAE6DF",
         "heading_color": "#666666",
         "title_color": "#C0BBAF",
@@ -337,7 +454,7 @@
         "enable_hover": true,
         "enable_scroll": true,
         "enable_pin": true,
-        "enable_cursor": false,
+        "enable_cursor": true,
         "enable_image_fade": true,
         "title_size_desktop": 80,
         "title_size_tablet": 56,
@@ -362,6 +479,7 @@
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX",
     "gsap_richtext_XAqnLj",
-    "product_showcase_J6JWpF"
+    "product_showcase_J6JWpF",
+    "intera_pro_Ud38Qj"
   ]
 }
