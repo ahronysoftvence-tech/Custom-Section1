@@ -353,6 +353,123 @@
         "image_fit": "cover",
         "image_position": "center"
       }
+    },
+    "intera_pro_dNQYba": {
+      "type": "intera-pro",
+      "blocks": {
+        "product_WJNbbP": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "product_url": ""
+          }
+        },
+        "product_PwXWCz": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "product_url": ""
+          }
+        },
+        "product_AJHeqV": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "product_url": ""
+          }
+        },
+        "product_PDRTtt": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "product_url": ""
+          }
+        },
+        "product_gQazXV": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "product_url": ""
+          }
+        },
+        "product_XPHWmx": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "product_url": ""
+          }
+        },
+        "product_nR8UXk": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "product_url": ""
+          }
+        },
+        "product_zN8hPn": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "product_url": ""
+          }
+        },
+        "product_ezHUJ7": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "product_url": ""
+          }
+        },
+        "product_DPTqwN": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_WJNbbP",
+        "product_PwXWCz",
+        "product_AJHeqV",
+        "product_PDRTtt",
+        "product_gQazXV",
+        "product_XPHWmx",
+        "product_nR8UXk",
+        "product_zN8hPn",
+        "product_ezHUJ7",
+        "product_DPTqwN"
+      ],
+      "name": "intra-pro",
+      "settings": {
+        "heading": "FEATURED PRODUCTS",
+        "bg_color": "#EAE6DF",
+        "heading_color": "#666666",
+        "title_color": "#C0BBAF",
+        "title_active_color": "#000000",
+        "cursor_text": "VIEW",
+        "cursor_bg_color": "#000000",
+        "cursor_text_color": "#FFFFFF",
+        "image_transition_duration": 0.6,
+        "enable_hover": true,
+        "enable_scroll": true,
+        "enable_pin": true,
+        "enable_cursor": true,
+        "enable_image_fade": true,
+        "title_size_desktop": 80,
+        "title_size_tablet": 56,
+        "title_size_mobile": 38,
+        "max_width": 1400,
+        "left_width": 70,
+        "right_width": 30,
+        "column_gap": 64,
+        "padding_desktop": 96,
+        "padding_tablet": 64,
+        "padding_mobile": 40,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "image_position": "center"
+      }
     }
   },
   "order": [
@@ -362,6 +479,7 @@
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX",
     "gsap_richtext_XAqnLj",
-    "product_showcase_J6JWpF"
+    "product_showcase_J6JWpF",
+    "intera_pro_dNQYba"
   ]
 }
