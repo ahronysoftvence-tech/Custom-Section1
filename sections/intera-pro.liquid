@@ -83,6 +83,7 @@
   .ifp-preview-sticky {
     position: sticky !important;
     top: 0 !important;
+    bottom: 0 !important;
     height: 100vh;
     max-height: 100vh;
     display: flex;
@@ -422,6 +423,7 @@
       if (sticky) {
         sticky.style.position = 'relative';
         sticky.style.top = '0';
+        sticky.style.bottom = 'auto';
         sticky.style.height = 'auto';
         sticky.style.maxHeight = 'none';
       }
@@ -575,7 +577,7 @@
   "max_blocks": 20,
   "presets": [
     {
-      "name": "intar-pro",
+      "name": "intra-pro",
       "blocks": [
         { "type": "product", "settings": { "title": "Dining Windsor" } },
         { "type": "product", "settings": { "title": "Luneta Stool" } },
