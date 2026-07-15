@@ -229,6 +229,7 @@
           "type": "product",
           "settings": {
             "title": "Dining Windsor",
+            "image": "shopify://shop_images/image-2.jpg",
             "product_url": ""
           }
         },
@@ -243,6 +244,7 @@
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
+            "image": "shopify://shop_images/tropical_granite_podium_geometric_plants_decoration_black_background.jpg",
             "product_url": ""
           }
         },
@@ -250,6 +252,15 @@
           "type": "product",
           "settings": {
             "title": "Dancing Bedside",
+            "image": "shopify://shop_images/image-1.jpg",
+            "product_url": ""
+          }
+        },
+        "product_7N9Uq7": {
+          "type": "product",
+          "settings": {
+            "title": "Product title",
+            "image": "shopify://shop_images/stage-design-with-christmas-concept-element.jpg",
             "product_url": ""
           }
         },
@@ -278,6 +289,7 @@
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
+            "image": "shopify://shop_images/Untitled_design.png",
             "product_url": ""
           }
         },
@@ -285,6 +297,7 @@
           "type": "product",
           "settings": {
             "title": "Dancing Bedside",
+            "image": "shopify://shop_images/image-3.jpg",
             "product_url": ""
           }
         },
@@ -292,6 +305,7 @@
           "type": "product",
           "settings": {
             "title": "Dancing Cupboard",
+            "image": "shopify://shop_images/21126.jpg",
             "product_url": ""
           }
         }
@@ -301,6 +315,7 @@
         "product_aRLFEY",
         "product_HetDgf",
         "product_jkxcz3",
+        "product_7N9Uq7",
         "product_wGtwAY",
         "product_VmK6gX",
         "product_MQ8cna",
