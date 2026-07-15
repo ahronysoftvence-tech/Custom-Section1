@@ -79,8 +79,7 @@
   .ifp-preview-sticky {
     position: sticky !important;
     top: 0 !important;
-    bottom: 0;
-    height: 100%;
+    height: auto;
     max-height: 100vh;
     display: flex;
     align-items: center;
@@ -134,81 +133,53 @@
     object-fit: contain;
   }
 
-  .ifp-titles,
-.ifp-titles *,
-.ifp-preview,
-.ifp-preview * {
-  cursor: none;
-}
+  /* Custom cursor: only hide the native cursor when the feature is enabled.
+     When disabled, the normal system cursor shows as usual. */
+  [data-cursor-enabled="true"] .ifp-titles,
+  [data-cursor-enabled="true"] .ifp-titles *,
+  [data-cursor-enabled="true"] .ifp-preview,
+  [data-cursor-enabled="true"] .ifp-preview * {
+    cursor: none;
+  }
 
-
-
-.ifp-section,
-.ifp-inner,
-.ifp-grid,
-.ifp-preview {
-  overflow: visible !important;
-}
-
-
-.ifp-section,
-.ifp-inner,
-.ifp-grid,
-.ifp-preview {
-  transform: none !important;
-}
-
-  /* Cursor follower */
-
-  /* .ifp-cursor {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 40;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 78px;
-    height: 78px;
-    border-radius: 50%;
-    background: var(--ifp-cursor-bg, #111);
-    color: var(--ifp-cursor-text-color, #fff);
-    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    will-change: transform;
-  } */
-
-
-  .ifp-cursor {
+.ifp-cursor {
   position: fixed;
   top: 0;
   left: 0;
   z-index: 40;
-
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 12px;
-
+  gap: 8px;
+  min-width: 90px;
+  min-height: 44px;
+  padding: 8px 16px;
   border-radius: 999px;
   background: var(--ifp-cursor-bg, #111);
   color: var(--ifp-cursor-text-color, #fff);
-
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-align: center;
   opacity: 0;
   pointer-events: none;
-
   transform: translate(-50%, -50%);
-  transition: opacity .2s ease;
+  transition: opacity 0.2s ease;
 }
 
-  .ifp-cursor.is-visible {
-    opacity: 1;
-  }
+.ifp-cursor.is-visible {
+  opacity: 1;
+}
+
+.cursor-dot {
+  display: block;
+  flex: 0 0 auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
 
   /* Reduced motion */
 
@@ -217,6 +188,8 @@
   .ifp-reduced-motion .ifp-cursor {
     transition: none !important;
   }
+
+
 
   /* Tablet */
 
@@ -257,7 +230,8 @@
     .ifp-preview-sticky {
       position: relative !important;
       top: 0 !important;
-      bottom: auto !important;
+      height: auto;
+      max-height: none;
     }
 
     .ifp-title-text {
@@ -341,7 +315,11 @@
 
       <div class="ifp-preview" data-ifp-preview>
         <div class="ifp-preview-sticky" data-ifp-preview-sticky>
-          <div class="ifp-image-stage" data-ifp-image-stage style="--ifp-ratio: {% case settings.image_ratio %}{% when 'square' or '1:1' %}1/1{% when 'portrait' %}4/5{% when 'landscape' %}16/9{% when '4:5' %}4/5{% when '3:4' %}3/4{% when '16:9' %}16/9{% else %}auto{% endcase %};">
+          {% comment %} <div class="ifp-image-stage" data-ifp-image-stage style="--ifp-ratio: {% case settings.image_ratio %}{% when 'square' or '1:1' %}1/1{% when 'portrait' %}4/5{% when 'landscape' %}16/9{% when '4:5' %}4/5{% when '3:4' %}3/4{% when '16:9' %}16/9{% else %}auto{% endcase %};"> {% endcomment %}
+
+            <div class="ifp-image-stage" data-ifp-image-stage data-image-ratio="{{ settings.image_ratio }}" style="--ifp-ratio: {% case settings.image_ratio %}{% when 'square' or '1:1' %}1/1{% when 'portrait' %}4/5{% when 'landscape' %}16/9{% when '4:5' %}4/5{% when '3:4' %}3/4{% when '16:9' %}16/9{% else %}auto{% endcase %};">
+
+
             {%- for block in blocks -%}
               {%- liquid
                 assign img = block.settings.image
@@ -386,8 +364,9 @@
 
   {%- if settings.enable_cursor -%}
     <div class="ifp-cursor" data-ifp-cursor aria-hidden="true">
-      <span>{{ settings.cursor_text | default: 'VIEW' }}</span>
-    </div>
+    <span class="cursor-dot"></span>
+    <span class="cursor-text">{{ settings.cursor_text | default: 'VIEW' }}</span>
+  </div>
   {%- endif -%}
 </section>
 
@@ -417,6 +396,31 @@
         img.classList.toggle('is-active', i === index);
       });
     }
+
+
+
+
+    /* ---------- Auto image ratio ---------- */
+if (stage && stage.dataset.imageRatio === 'adapt') {
+  const firstImage = stage.querySelector('.ifp-image');
+
+  if (firstImage) {
+    function setImageRatio() {
+      if (firstImage.naturalWidth && firstImage.naturalHeight) {
+        const ratio = firstImage.naturalWidth / firstImage.naturalHeight;
+        stage.style.setProperty('--ifp-ratio', ratio);
+      }
+    }
+
+    if (firstImage.complete) {
+      setImageRatio();
+    } else {
+      firstImage.addEventListener('load', setImageRatio);
+    }
+  }
+}
+
+
 
     /* ---------- Hover interaction ---------- */
     if (hoverEnabled) {
@@ -457,33 +461,21 @@
       if (sticky) {
         sticky.style.position = 'relative';
         sticky.style.top = '0';
-        sticky.style.bottom = 'auto';
+        sticky.style.height = 'auto';
+        sticky.style.maxHeight = 'none';
       }
     }
 
     /* ---------- Custom floating cursor ---------- */
-    {% comment %} if (cursorEnabled && cursor) {
+    if (cursorEnabled && cursor) {
       const titlesWrap = section.querySelector('[data-ifp-titles]');
       const previewWrap = section.querySelector('[data-ifp-preview]');
-      let mouseX = 0;
-      let mouseY = 0;
-      let curX = 0;
-      let curY = 0;
-      let raf = null;
       let visible = false;
-
-      function loop() {
-        curX += (mouseX - curX) * 0.18;
-        curY += (mouseY - curY) * 0.18;
-        cursor.style.transform = 'translate3d(' + curX + 'px,' + curY + 'px,0) translate(-50%, -50%)';
-        raf = requestAnimationFrame(loop);
-      }
 
       function show() {
         if (!visible) {
           visible = true;
           cursor.classList.add('is-visible');
-          if (!raf) loop();
         }
       }
 
@@ -493,8 +485,8 @@
       }
 
       function trackMouse(e) {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        cursor.style.transform =
+          `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
         show();
       }
 
@@ -507,43 +499,7 @@
         previewWrap.addEventListener('mousemove', trackMouse);
         previewWrap.addEventListener('mouseleave', hide);
       }
-    } {% endcomment %}
-
-
-
-    if (cursorEnabled && cursor) {
-  const titlesWrap = section.querySelector('[data-ifp-titles]');
-  const previewWrap = section.querySelector('[data-ifp-preview]');
-  let visible = false;
-
-  function show() {
-    if (!visible) {
-      visible = true;
-      cursor.classList.add('is-visible');
     }
-  }
-
-  function hide() {
-    visible = false;
-    cursor.classList.remove('is-visible');
-  }
-
-  function trackMouse(e) {
-    cursor.style.transform =
-      `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-    show();
-  }
-
-  if (titlesWrap) {
-    titlesWrap.addEventListener('mousemove', trackMouse);
-    titlesWrap.addEventListener('mouseleave', hide);
-  }
-
-  if (previewWrap) {
-    previewWrap.addEventListener('mousemove', trackMouse);
-    previewWrap.addEventListener('mouseleave', hide);
-  }
-}
 
     /* ---------- Right-side hover sync ---------- */
     /* Hovering the visible preview image highlights its matching title,
@@ -565,7 +521,7 @@
 
 {% schema %}
 {
-  "name": "Interactive Products",
+  "name": "Product Carousel ",
   "tag": "section",
   "class": "shopify-section--ifp",
   "settings": [
@@ -588,7 +544,7 @@
     { "type": "checkbox", "id": "enable_hover", "label": "Enable hover interaction", "default": true },
     { "type": "checkbox", "id": "enable_scroll", "label": "Enable scroll-driven interaction", "default": true },
     { "type": "checkbox", "id": "enable_pin", "label": "Enable pinned image preview", "default": true },
-    { "type": "checkbox", "id": "enable_cursor", "label": "Enable custom animated cursor (off = normal cursor)", "default": false },
+    { "type": "checkbox", "id": "enable_cursor", "label": "Enable custom animated cursor (off = normal cursor)", "default": true },
     { "type": "checkbox", "id": "enable_image_fade", "label": "Enable image fade animation", "default": true },
 
     { "type": "header", "content": "Typography" },
@@ -658,7 +614,7 @@
   "max_blocks": 20,
   "presets": [
     {
-      "name": "Product showcase",
+      "name": "Product list Carousel",
       "blocks": [
         { "type": "product", "settings": { "title": "Dining Windsor" } },
         { "type": "product", "settings": { "title": "Luneta Stool" } },
