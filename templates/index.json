@@ -34,6 +34,7 @@
     },
     "2_4_image_card_74P7Nx": {
       "type": "2-4-image-card",
+      "disabled": true,
       "name": "Gym Benefits",
       "settings": {
         "bg_color": "#ffffff",
@@ -72,6 +73,7 @@
         "image_nKJLpE",
         "image_DYMFhf"
       ],
+      "disabled": true,
       "name": "Before/after image slider",
       "settings": {
         "container": "container-fluid",
@@ -116,6 +118,7 @@
         "item_eHJfaw",
         "item_qQm6jq"
       ],
+      "disabled": true,
       "name": "Collapsible tabs",
       "settings": {
         "container": "container",
@@ -163,6 +166,7 @@
         "collection_hw8z8L",
         "collection_6xP8Pt"
       ],
+      "disabled": true,
       "name": "Collection image showcase",
       "settings": {
         "container": "container-fluid",
@@ -209,6 +213,7 @@
         "text_DNrtYC",
         "button_CFiHKh"
       ],
+      "disabled": true,
       "name": "Rich text - GSAP",
       "settings": {
         "color_schemes": "badge-sale",
@@ -222,70 +227,26 @@
         "content_alignment": "center"
       }
     },
-    "product_showcase_J6JWpF": {
+    "product_showcase_k9UT38": {
       "type": "product-showcase",
       "blocks": {
-        "product_wJHRxk": {
+        "product_XNfaxi": {
           "type": "product",
           "settings": {
             "title": "Dining Windsor",
-            "image": "shopify://shop_images/image-2.jpg",
+            "image": "shopify://shop_images/image-5.jpg",
             "product_url": ""
           }
         },
-        "product_aRLFEY": {
+        "product_BBgGiX": {
           "type": "product",
           "settings": {
             "title": "Luneta Stool",
+            "image": "shopify://shop_images/4187793.jpg",
             "product_url": ""
           }
         },
-        "product_HetDgf": {
-          "type": "product",
-          "settings": {
-            "title": "99 Bedside Table",
-            "image": "shopify://shop_images/tropical_granite_podium_geometric_plants_decoration_black_background.jpg",
-            "product_url": ""
-          }
-        },
-        "product_jkxcz3": {
-          "type": "product",
-          "settings": {
-            "title": "Dancing Bedside",
-            "image": "shopify://shop_images/image-1.jpg",
-            "product_url": ""
-          }
-        },
-        "product_7N9Uq7": {
-          "type": "product",
-          "settings": {
-            "title": "Product title",
-            "image": "shopify://shop_images/stage-design-with-christmas-concept-element.jpg",
-            "product_url": ""
-          }
-        },
-        "product_wGtwAY": {
-          "type": "product",
-          "settings": {
-            "title": "Dancing Cupboard",
-            "product_url": ""
-          }
-        },
-        "product_VmK6gX": {
-          "type": "product",
-          "settings": {
-            "title": "Dining Windsor",
-            "product_url": ""
-          }
-        },
-        "product_MQ8cna": {
-          "type": "product",
-          "settings": {
-            "title": "Luneta Stool",
-            "product_url": ""
-          }
-        },
-        "product_RFEJPP": {
+        "product_iMbY8y": {
           "type": "product",
           "settings": {
             "title": "99 Bedside Table",
@@ -293,154 +254,76 @@
             "product_url": ""
           }
         },
-        "product_4XMLLx": {
+        "product_qJk3zX": {
           "type": "product",
           "settings": {
             "title": "Dancing Bedside",
+            "image": "shopify://shop_images/bg8.jpg",
+            "product_url": ""
+          }
+        },
+        "product_izEa7h": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
             "image": "shopify://shop_images/image-3.jpg",
             "product_url": ""
           }
         },
-        "product_QUWKij": {
+        "product_xrbdNd": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "image": "shopify://shop_images/golden-podium-display-with-palm-leaves.jpg",
+            "product_url": ""
+          }
+        },
+        "product_cPt68C": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "image": "shopify://shop_images/Untitled_design_1.png",
+            "product_url": ""
+          }
+        },
+        "product_Nyhfqz": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "image": "shopify://shop_images/9554724.jpg",
+            "product_url": ""
+          }
+        },
+        "product_PkEggw": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "image": "shopify://shop_images/music-party-stage-with-rainbow-music-music-notes.jpg",
+            "product_url": ""
+          }
+        },
+        "product_q6zNdX": {
           "type": "product",
           "settings": {
             "title": "Dancing Cupboard",
-            "image": "shopify://shop_images/21126.jpg",
+            "image": "shopify://shop_images/abstract_white_colored_gradient_glasses_interior_multilevel_public.jpg",
             "product_url": ""
           }
         }
       },
       "block_order": [
-        "product_wJHRxk",
-        "product_aRLFEY",
-        "product_HetDgf",
-        "product_jkxcz3",
-        "product_7N9Uq7",
-        "product_wGtwAY",
-        "product_VmK6gX",
-        "product_MQ8cna",
-        "product_RFEJPP",
-        "product_4XMLLx",
-        "product_QUWKij"
+        "product_XNfaxi",
+        "product_BBgGiX",
+        "product_iMbY8y",
+        "product_qJk3zX",
+        "product_izEa7h",
+        "product_xrbdNd",
+        "product_cPt68C",
+        "product_Nyhfqz",
+        "product_PkEggw",
+        "product_q6zNdX"
       ],
-      "name": "Product showcase",
-      "settings": {
-        "heading": "FEATURED PRODUCTS",
-        "bg_color": "#eae6df",
-        "heading_color": "#666666",
-        "title_color": "#c0bbaf",
-        "title_active_color": "#000000",
-        "cursor_text": "VIEW",
-        "cursor_bg_color": "#000000",
-        "cursor_text_color": "#ffffff",
-        "image_transition_duration": 0.6,
-        "enable_hover": true,
-        "enable_scroll": true,
-        "enable_pin": true,
-        "enable_cursor": false,
-        "enable_image_fade": true,
-        "title_size_desktop": 80,
-        "title_size_tablet": 56,
-        "title_size_mobile": 38,
-        "max_width": 1400,
-        "left_width": 70,
-        "right_width": 30,
-        "column_gap": 64,
-        "padding_desktop": 96,
-        "padding_tablet": 64,
-        "padding_mobile": 40,
-        "image_ratio": "portrait",
-        "image_fit": "cover",
-        "image_position": "center"
-      }
-    },
-    "intera_pro_dNQYba": {
-      "type": "intera-pro",
-      "blocks": {
-        "product_WJNbbP": {
-          "type": "product",
-          "settings": {
-            "title": "Dining Windsor",
-            "product_url": ""
-          }
-        },
-        "product_PwXWCz": {
-          "type": "product",
-          "settings": {
-            "title": "Luneta Stool",
-            "product_url": ""
-          }
-        },
-        "product_AJHeqV": {
-          "type": "product",
-          "settings": {
-            "title": "99 Bedside Table",
-            "product_url": ""
-          }
-        },
-        "product_PDRTtt": {
-          "type": "product",
-          "settings": {
-            "title": "Dancing Bedside",
-            "product_url": ""
-          }
-        },
-        "product_gQazXV": {
-          "type": "product",
-          "settings": {
-            "title": "Dancing Cupboard",
-            "product_url": ""
-          }
-        },
-        "product_XPHWmx": {
-          "type": "product",
-          "settings": {
-            "title": "Dining Windsor",
-            "product_url": ""
-          }
-        },
-        "product_nR8UXk": {
-          "type": "product",
-          "settings": {
-            "title": "Luneta Stool",
-            "product_url": ""
-          }
-        },
-        "product_zN8hPn": {
-          "type": "product",
-          "settings": {
-            "title": "99 Bedside Table",
-            "product_url": ""
-          }
-        },
-        "product_ezHUJ7": {
-          "type": "product",
-          "settings": {
-            "title": "Dancing Bedside",
-            "product_url": ""
-          }
-        },
-        "product_DPTqwN": {
-          "type": "product",
-          "settings": {
-            "title": "Dancing Cupboard",
-            "product_url": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_WJNbbP",
-        "product_PwXWCz",
-        "product_AJHeqV",
-        "product_PDRTtt",
-        "product_gQazXV",
-        "product_XPHWmx",
-        "product_nR8UXk",
-        "product_zN8hPn",
-        "product_ezHUJ7",
-        "product_DPTqwN"
-      ],
-      "name": "intra-pro",
+      "name": "Product list Carousel",
       "settings": {
         "heading": "FEATURED PRODUCTS",
         "bg_color": "#EAE6DF",
@@ -448,8 +331,8 @@
         "title_color": "#C0BBAF",
         "title_active_color": "#000000",
         "cursor_text": "VIEW",
-        "cursor_bg_color": "#000000",
-        "cursor_text_color": "#FFFFFF",
+        "cursor_bg_color": "rgba(0,0,0,0)",
+        "cursor_text_color": "#000000",
         "image_transition_duration": 0.6,
         "enable_hover": true,
         "enable_scroll": true,
@@ -479,7 +362,6 @@
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX",
     "gsap_richtext_XAqnLj",
-    "product_showcase_J6JWpF",
-    "intera_pro_dNQYba"
+    "product_showcase_k9UT38"
   ]
 }
