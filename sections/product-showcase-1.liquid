@@ -243,12 +243,8 @@
       max-height: none;
     }
 
-    /* Overlay mode (default): image is a small pinned card that sits
-       within a reserved gutter beside the title text, so nothing gets covered. */
-    .ifp-section[data-mobile-overlay="true"] .ifp-titles {
-      padding-right: calc(var(--ifp-mobile-image-width, 42%) + 16px);
-    }
-
+    /* Overlay mode (default): titles run full width; the image floats
+       on top of them as a small pinned card. */
     .ifp-section[data-mobile-overlay="true"] .ifp-preview {
       position: absolute;
       top: 0;
@@ -270,6 +266,7 @@
       border-radius: var(--ifp-mobile-image-radius, 12px);
       overflow: hidden;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+      background: var(--ifp-bg, #fff);
     }
 
     .ifp-title-text {
@@ -668,7 +665,7 @@
   "max_blocks": 20,
   "presets": [
     {
-      "name": "Product show-v1",
+      "name": "Product list Carousel",
       "blocks": [
         { "type": "product", "settings": { "title": "Dining Windsor" } },
         { "type": "product", "settings": { "title": "Luneta Stool" } },
