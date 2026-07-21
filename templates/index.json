@@ -326,9 +326,9 @@
       "name": "Product list Carousel",
       "settings": {
         "heading": "FEATURED PRODUCTS",
-        "bg_color": "#EAE6DF",
+        "bg_color": "#eae6df",
         "heading_color": "#666666",
-        "title_color": "#C0BBAF",
+        "title_color": "#c0bbaf",
         "title_active_color": "#000000",
         "cursor_text": "VIEW",
         "cursor_bg_color": "rgba(0,0,0,0)",
@@ -353,6 +353,127 @@
         "image_fit": "cover",
         "image_position": "center"
       }
+    },
+    "product_showcase_1_XUhKRJ": {
+      "type": "product-showcase-1",
+      "blocks": {
+        "product_Db43h7": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "product_url": ""
+          }
+        },
+        "product_reh3kG": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "product_url": ""
+          }
+        },
+        "product_GhJijJ": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "product_url": ""
+          }
+        },
+        "product_xW9GjW": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "product_url": ""
+          }
+        },
+        "product_74jigT": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "product_url": ""
+          }
+        },
+        "product_cDgJGG": {
+          "type": "product",
+          "settings": {
+            "title": "Dining Windsor",
+            "product_url": ""
+          }
+        },
+        "product_CaUp9L": {
+          "type": "product",
+          "settings": {
+            "title": "Luneta Stool",
+            "product_url": ""
+          }
+        },
+        "product_MUnWwd": {
+          "type": "product",
+          "settings": {
+            "title": "99 Bedside Table",
+            "product_url": ""
+          }
+        },
+        "product_69QckL": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Bedside",
+            "product_url": ""
+          }
+        },
+        "product_HQjF3t": {
+          "type": "product",
+          "settings": {
+            "title": "Dancing Cupboard",
+            "product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "product_Db43h7",
+        "product_reh3kG",
+        "product_GhJijJ",
+        "product_xW9GjW",
+        "product_74jigT",
+        "product_cDgJGG",
+        "product_CaUp9L",
+        "product_MUnWwd",
+        "product_69QckL",
+        "product_HQjF3t"
+      ],
+      "name": "Product show-v1",
+      "settings": {
+        "heading": "FEATURED PRODUCTS",
+        "bg_color": "#EAE6DF",
+        "heading_color": "#666666",
+        "title_color": "#C0BBAF",
+        "title_active_color": "#000000",
+        "cursor_text": "VIEW",
+        "cursor_bg_color": "#000000",
+        "cursor_text_color": "#FFFFFF",
+        "image_transition_duration": 0.6,
+        "enable_hover": true,
+        "enable_scroll": true,
+        "enable_pin": true,
+        "enable_cursor": true,
+        "enable_image_fade": true,
+        "title_size_desktop": 80,
+        "title_size_tablet": 56,
+        "title_size_mobile": 38,
+        "max_width": 1400,
+        "left_width": 70,
+        "right_width": 30,
+        "column_gap": 64,
+        "padding_desktop": 96,
+        "padding_tablet": 64,
+        "padding_mobile": 40,
+        "enable_mobile_overlay": true,
+        "mobile_image_width": 42,
+        "mobile_image_top_offset": 16,
+        "mobile_image_radius": 12,
+        "image_ratio": "portrait",
+        "image_fit": "cover",
+        "image_position": "center"
+      }
     }
   },
   "order": [
@@ -362,6 +483,7 @@
     "collapsible_tabs_aiKiky",
     "collection_image_showcase_EtnaMX",
     "gsap_richtext_XAqnLj",
-    "product_showcase_k9UT38"
+    "product_showcase_k9UT38",
+    "product_showcase_1_XUhKRJ"
   ]
 }
